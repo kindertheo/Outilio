@@ -12,3 +12,5 @@ Route::put('/orders', [OrderController::class, 'update']);
 Route::get('/products', [ProductController::class, 'create']);
 Route::post('/products', [ProductController::class, 'store']);
 Route::get('/all-products', [ProductController::class, 'all']);
+Route::get('/products/{product}', [ProductController::class, 'edit']);
+Route::put('/products/{product}', [ProductController::class, 'update']);
