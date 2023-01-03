@@ -3,25 +3,42 @@ import axios from "axios";
 export const product = {
     namespaced: true,
     state: () => ({
-        order: {
-
+        products: [],
+        product: {
+            name: "",
+            description: "",
+            priceByDay: 0,
         },
     }),
     mutations: {
-
+        setProducts(state, products) {
+            state.products = products;
+        },
     },
     actions: {
-        async createProduct({dispatch, getters}){
+        async createProduct({ getters }) {
+            const product = getters.getProduct;
 
+            await axios.post("/products", {
+                product,
+            });
+
+            window.location.href = "/products";
         },
-        async updateProduct({dispatch, getters}){
+        async updateProduct({ dispatch, getters }) {},
+        async deleteProduct({ dispatch, getters }) {},
 
+        async setProducts({ commit }) {
+            const { data } = await axios.get("/all-products");
+            commit("setProducts", data);
         },
-        async deleteProduct({dispatch, getters}){
-
-        }
     },
     getters: {
-
-    }
-}
+        getProduct(state) {
+            return state.product;
+        },
+        getProducts(state) {
+            return state.products;
+        },
+    },
+};
