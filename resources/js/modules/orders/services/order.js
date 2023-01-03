@@ -11,7 +11,7 @@ export const order = {
             customerEmail: '',
             customerFirstname: '',
             customerLastname: '',
-            products: []
+            productsIds: []
         },
     }),
     mutations: {
