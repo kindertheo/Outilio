@@ -3,17 +3,17 @@
         type="checkbox"
         class="btn-check"
         :id="`btn-check-outlined-${product.id}`"
-        :value="product.id"
-        v-model="order.productsIds"
+        :value="product"
+        v-model="order.products"
         autocomplete="off"
     />
     <label
         class="btn btn-outline-primary"
         :for="`btn-check-outlined-${product.id}`"
     >
-        <p>{{ product.name }}</p>
-        <p>{{ product.description }}</p>
-        <p>{{ product.price_by_day / 100 }}</p>
+        {{ product.name }}
+        {{ product.description }}
+        {{ product.price_by_day / 100 }}
     </label>
 </template>
 
