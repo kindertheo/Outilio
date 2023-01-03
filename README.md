@@ -9,7 +9,7 @@ git clone https://github.com/kindertheo/Outilio.git
 Create the .env file
 ```sh
 cd outilio/
-cp .env .env
+cp .env.example .env
 ```
 
 Change DB_DATABASE=laravel in .env file
@@ -17,7 +17,7 @@ Change DB_DATABASE=laravel in .env file
 DB_DATABASE=outilio_db
 ```
 
-####Then create database in your phpmyadmin
+#### Then create database in your phpmyadmin
 
 Install project dependencies
 ```sh
