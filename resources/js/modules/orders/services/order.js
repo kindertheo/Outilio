@@ -11,6 +11,7 @@ export const order = {
             customerEmail: '',
             customerFirstname: '',
             customerLastname: '',
+            price: 0,
             productsIds: []
         },
     }),
@@ -19,6 +20,11 @@ export const order = {
     },
     actions: {
         async createOrder({dispatch, getters}){
+            const order = getters.getOrder;
+
+            const { data } = await axios.post('/orders', {
+                order
+            });
 
         },
         async updateOrder({dispatch, getters}){
@@ -26,6 +32,8 @@ export const order = {
         }
     },
     getters: {
-
+        getOrder(state){
+            return state.order;
+        }
     }
 }

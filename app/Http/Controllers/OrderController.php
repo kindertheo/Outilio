@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -35,7 +36,19 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'order' => 'required'
+        ]);
+
+        $order = Order::create([
+            'date' => Carbon::createFromTimeString($request->order['date'])->toDateTimeString(),
+            'delivery_option' => $request->order['deliveryOption'],
+            'customer_phone' => $request->order['customerPhone'],
+            'customer_email' => $request->order['customerEmail'],
+            'customer_firstname' => $request->order['customerFirstname'],
+            'customer_lastname' => $request->order['customerLastname'],
+            'price' => $request->order['price'] * 100,
+        ]);
     }
 
     /**
