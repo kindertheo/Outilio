@@ -6,6 +6,7 @@ const components = [
     'orders/components/OrderForm',
     'products/components/ProductCard',
     'products/components/ProductsList',
+    'products/components/ProductForm'
 ];
 
 const addComponent = (app, component) => {
