@@ -17,8 +17,9 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->date('date');
             $table->integer('price');
-            $table->boolean('is_delivered');
-            $table->enum('state', ['pending', 'accepted', 'refused', 'ended']);
+            $table->boolean('delivery_option');
+            $table->boolean('is_accepted')->default(false);
+            $table->boolean('is_processed')->default(false);
             $table->string('customer_phone');
             $table->string('customer_email');
             $table->string('customer_firstname');

@@ -19,6 +19,7 @@
     "dependencies": {
         "bootstrap": "^5.2.3",
         "v-calendar": "^3.0.0-alpha.8",
-        "vue": "^3.2.36"
+        "vue": "^3.2.36",
+        "vuex": "^4.0.2"
     }
 }
