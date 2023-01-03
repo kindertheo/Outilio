@@ -13,6 +13,8 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+.env.testing
+composer.lock
+public/mix-manifest.json
 public/css/app.css
 public/js/app.js
-public/mix-manifest.json
