@@ -2,12 +2,15 @@ import lastStringElement from "../utils/lastStringElement";
 import kebabize from "../utils/kebabize";
 
 const components = [
-
+    'orders/OrdersView',
+    'orders/components/OrderForm',
+    'products/components/ProductCard',
+    'products/components/ProductsList',
 ];
 
 const addComponent = (app, component) => {
     const componentName = lastStringElement(component, '/');
-    app.component(kebabize(componentName), require(`../${component}`).default);
+    app.component(kebabize(componentName), require(`../modules/${component}`).default);
 }
 
 const addComponents = (app) => {
