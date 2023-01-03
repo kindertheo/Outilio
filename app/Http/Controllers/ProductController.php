@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -24,7 +26,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -35,7 +37,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'product' => 'required'
+        ]);
+
+        $product = Product::create([
+            'name' => $request->product['name'],
+            'sluggy_name' => Str::slug($request->product['name'], '-'),
+            'description' => $request->product['description'],
+            'price_by_day' => $request->product['priceByDay'] * 100,
+            'created_at' => Carbon::now()
+        ]);
+
+        return json_encode(['product' => $product], 200);
     }
 
     /**
@@ -47,6 +61,16 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+    }
+
+    /**
+     * Display all the products.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function all()
+    {
+        return Product::all();
     }
 
     /**
