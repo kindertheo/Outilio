@@ -3,7 +3,7 @@ import axios from "axios";
 export const product = {
     namespaced: true,
     state: () => ({
-        order: {
+        product: {
 
         },
     }),
