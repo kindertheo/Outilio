@@ -14,6 +14,9 @@ export const product = {
         setProducts(state, products) {
             state.products = products;
         },
+        setProduct(state, product) {
+            state.product = product;
+        },
     },
     actions: {
         async createProduct({ getters }) {
