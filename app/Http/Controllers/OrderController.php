@@ -47,8 +47,11 @@ class OrderController extends Controller
             'customer_email' => $request->order['customerEmail'],
             'customer_firstname' => $request->order['customerFirstname'],
             'customer_lastname' => $request->order['customerLastname'],
-            'price' => $request->order['price'] * 100,
+            'price' => $request->order['price'],
         ]);
+
+        foreach ($request->order['products'] as $product)
+            $order->products()->attach($product['id']);
     }
 
     /**
