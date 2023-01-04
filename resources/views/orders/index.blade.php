@@ -1,4 +1,4 @@
 @extends('layouts.default')
 @section('content')
-    <create-order-view/>
+    <orders-view/>
 @endsection

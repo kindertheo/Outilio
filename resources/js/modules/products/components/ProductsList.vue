@@ -14,10 +14,14 @@ export default {
         await this.setProducts();
     },
     methods: {
-        ...mapActions("ProductStore", ["setProducts"]),
+        ...mapActions('ProductStore', [
+            'setProducts'
+        ]),
     },
     computed: {
-        ...mapGetters("ProductStore", ["getProducts"]),
+        ...mapGetters('ProductStore', [
+            'getProducts'
+        ]),
         products: {
             get() {
                 return this.getProducts;

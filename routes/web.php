@@ -9,8 +9,10 @@ Route::get('/orders', [OrderController::class, 'index']);
 Route::post('/orders', [OrderController::class, 'store']);
 Route::put('/orders', [OrderController::class, 'update']);
 
-Route::get('/products', [ProductController::class, 'create']);
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/create', [ProductController::class, 'create']);
 Route::post('/products', [ProductController::class, 'store']);
 Route::get('/all-products', [ProductController::class, 'all']);
 Route::get('/products/{product}', [ProductController::class, 'edit']);
 Route::put('/products/{product}', [ProductController::class, 'update']);
+Route::delete('/products/{product}', [ProductController::class, 'destroy']);

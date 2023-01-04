@@ -1,4 +1,4 @@
 @extends('layouts.default')
 @section('content')
-<product-form />
+    <create-product-view/>
 @endsection

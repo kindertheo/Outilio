@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return view('orders.index');
     }
 
     /**
@@ -41,7 +41,7 @@ class OrderController extends Controller
         ]);
 
         $order = Order::create([
-            'date' => Carbon::createFromTimeString($request->order['date'])->toDateTimeString(),
+            'date' => Carbon::createFromTimeString($request->order['date'])->toDateString(),
             'delivery_option' => $request->order['deliveryOption'],
             'customer_phone' => $request->order['customerPhone'],
             'customer_email' => $request->order['customerEmail'],

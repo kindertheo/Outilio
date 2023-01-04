@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -16,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('products.index');
     }
 
     /**
@@ -68,9 +69,37 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function all()
+    public function all(Request $request)
     {
-        return Product::all();
+        $this->validate($request, [
+            'date' => 'required'
+        ]);
+
+        $date = Carbon::createFromTimeString($request->date)->toDateString();
+
+        $productsAvailables = Product::whereRelation('orders', 'date', '!=', $date)
+            ->orWhereDoesntHave('orders')
+            ->select(
+                'id',
+                'name',
+                'description',
+                'price_by_day'
+            )
+            ->addSelect(DB::raw('1 as is_available'))
+            ->get();
+
+        $productsNotAvailables = Product::whereRelation('orders', 'date', '=', $date)
+            ->whereRelation('orders', 'is_accepted', true)
+            ->select(
+                'id',
+                'name',
+                'description',
+                'price_by_day'
+            )
+            ->addSelect(DB::raw('0 as is_available'))
+            ->get();
+
+        return $productsAvailables->merge($productsNotAvailables);
     }
 
     /**
@@ -95,7 +124,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $this->validate($request, [
+            'product' => 'required'
+        ]);
+
+        $product->update([
+            'name' => $request->product['name'],
+            'sluggy_name' => Str::slug($request->product['name'], '-'),
+            'description' => $request->product['description'],
+            'price_by_day' => $request->product['priceByDay'] * 100,
+            'updated_at' => Carbon::now()
+        ]);
+
+        return json_encode(['product' => $product], 200);
     }
 
     /**
@@ -106,6 +147,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
     }
 }

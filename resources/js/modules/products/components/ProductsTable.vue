@@ -1,0 +1,33 @@
+<template>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Prix par jour</th>
+            <th></th>
+        </tr>
+        <product-row v-for="product of this.products" :product="product"/>
+    </table>
+</template>
+
+<script>
+import {mapGetters} from "vuex";
+
+export default {
+    name: "ProductsTable",
+    computed: {
+        ...mapGetters('ProductStore', [
+            'getProducts'
+        ]),
+        products: {
+            get() {
+                return this.getProducts;
+            },
+        },
+    },
+}
+</script>
+
+<style scoped>
+
+</style>

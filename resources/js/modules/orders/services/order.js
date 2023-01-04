@@ -16,16 +16,28 @@ export const order = {
             products: [],
         },
     }),
-    mutations: {},
+    mutations: {
+        resetOrder(state){
+            state.order.date = new Date();
+            state.order.deliveryOption = false;
+            state.order.customerPhone = "";
+            state.order.customerEmail = "";
+            state.order.customerFirstname = "";
+            state.order.customerLastname = "";
+            state.order.products = [];
+        }
+    },
     actions: {
-        async createOrder({ dispatch, getters }) {
+        async createOrder({ commit, getters }) {
             let order = getters.getOrder;
 
             order.price = getters.computedPrice;
 
-            const { data } = await axios.post("/orders", {
+            await axios.post("/orders", {
                 order,
             });
+
+            commit('resetOrder');
         },
         async updateOrder({ dispatch, getters }) {},
     },
@@ -33,22 +45,36 @@ export const order = {
         getOrder(state) {
             return state.order;
         },
-        computedPrice(state){
-            const price = getSum(
+        getDiscountCoef(state){
+            return 1 - (state.order.products.length * 5) / 100;
+        },
+        getOrderPrice(state){
+            return getSum(
                 state.order.products.map((product) => product.price_by_day)
             );
+        },
+        computedDiscount(state, getters){
+            const price = getters.getOrderPrice;
+
+            return price * (state.order.products.length * 0.05);
+        },
+        computedPrice(state, getters){
+            const price = getters.getOrderPrice;
 
             const deliveryPrice = state.order.deliveryOption ? 2000 : 0;
 
             if (state.order.products.length < 2) return price + deliveryPrice;
 
             return (
-                price * (1 - (state.order.products.length * 5) / 100) +
+                price - getters.computedDiscount +
                 deliveryPrice
             );
         },
-        getOrderPrice(state, getters) {
+        getFormattedOrderPrice(state, getters) {
            return getPrice(getters.computedPrice);
         },
+        getFormattedOrderDiscount(state, getters){
+            return getPrice(getters.computedDiscount);
+        }
     },
 };

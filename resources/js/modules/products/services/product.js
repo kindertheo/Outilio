@@ -5,8 +5,9 @@ export const product = {
     state: () => ({
         products: [],
         product: {
-            name: "",
-            description: "",
+            id: null,
+            name: '',
+            description: '',
             priceByDay: 0,
         },
     }),
@@ -22,17 +23,36 @@ export const product = {
         async createProduct({ getters }) {
             const product = getters.getProduct;
 
-            await axios.post("/products", {
+            await axios.post('/products', {
                 product,
             });
 
-            window.location.href = "/products";
+            window.location.href = '/products';
         },
-        async updateProduct({ dispatch, getters }) {},
-        async deleteProduct({ dispatch, getters }) {},
+        async updateProduct({ dispatch, getters }) {
+            const product = getters.getProduct;
 
-        async setProducts({ commit }) {
-            const { data } = await axios.get("/all-products");
+            await axios.put(`/products/${product.id}`, {
+                product,
+            });
+
+            window.location.href = '/products';
+        },
+        async deleteProduct({ dispatch }, payload) {
+
+            await axios.delete(`/products/${payload.productId}`);
+
+            await dispatch('setProducts');
+        },
+        async setProducts({ commit, rootGetters }) {
+            const order = rootGetters['OrderStore/getOrder'];
+
+            const { data } = await axios.get('/all-products', {
+                params: {
+                    date: order.date,
+                }
+            });
+
             commit("setProducts", data);
         },
     },
