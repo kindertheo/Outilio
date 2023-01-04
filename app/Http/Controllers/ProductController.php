@@ -136,7 +136,7 @@ class ProductController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        return json_encode(['product' => $product], 200);
+        return json_encode(['product' => $product], 201);
     }
 
     /**

@@ -7,24 +7,36 @@ export const order = {
     state: () => ({
         orders: [],
         order: {
+            id: null,
             date: new Date(),
             deliveryOption: false,
-            customerPhone: "",
-            customerEmail: "",
-            customerFirstname: "",
-            customerLastname: "",
-            products: [],
-        },
+            customerPhone: '',
+            customerEmail: '',
+            customerFirstname: '',
+            customerLastname: '',
+            isAccepted: false,
+            isProcessed: false,
+            products: []
+        }
     }),
     mutations: {
         resetOrder(state){
+            state.order.id = null;
             state.order.date = new Date();
             state.order.deliveryOption = false;
-            state.order.customerPhone = "";
-            state.order.customerEmail = "";
-            state.order.customerFirstname = "";
-            state.order.customerLastname = "";
+            state.order.customerPhone = '';
+            state.order.customerEmail = '';
+            state.order.customerFirstname = '';
+            state.order.customerLastname = '';
+            state.order.isAccepted = false;
+            state.order.isProcessed = false;
             state.order.products = [];
+        },
+        setOrder(state, order){
+            state.order = order;
+        },
+        setOrders(state, orders){
+            state.orders = orders;
         }
     },
     actions: {
@@ -39,11 +51,28 @@ export const order = {
 
             commit('resetOrder');
         },
-        async updateOrder({ dispatch, getters }) {},
+        async updateOrder({ dispatch, commit, getters }) {
+            const order = getters.getOrder;
+
+            await axios.put(`/orders/${order.id}`, {
+                order,
+            });
+
+            dispatch('setOrders');
+            commit('resetOrder');
+        },
+        async setOrders({ commit }) {
+            const { data } = await axios.get('/all-orders');
+
+            commit('setOrders', data);
+        },
     },
     getters: {
         getOrder(state) {
             return state.order;
+        },
+        getOrders(state){
+            return state.orders;
         },
         getDiscountCoef(state){
             return 1 - (state.order.products.length * 5) / 100;

@@ -29,7 +29,7 @@ export const product = {
 
             window.location.href = '/products';
         },
-        async updateProduct({ dispatch, getters }) {
+        async updateProduct({ getters }) {
             const product = getters.getProduct;
 
             await axios.put(`/products/${product.id}`, {
@@ -39,7 +39,6 @@ export const product = {
             window.location.href = '/products';
         },
         async deleteProduct({ dispatch }, payload) {
-
             await axios.delete(`/products/${payload.productId}`);
 
             await dispatch('setProducts');

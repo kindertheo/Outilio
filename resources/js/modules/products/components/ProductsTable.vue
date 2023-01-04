@@ -6,7 +6,7 @@
             <th>Prix par jour</th>
             <th></th>
         </tr>
-        <product-row v-for="product of this.products" :product="product"/>
+        <product-row v-for="product of this.getProducts" :product="product"/>
     </table>
 </template>
 
@@ -19,11 +19,6 @@ export default {
         ...mapGetters('ProductStore', [
             'getProducts'
         ]),
-        products: {
-            get() {
-                return this.getProducts;
-            },
-        },
     },
 }
 </script>

@@ -12,6 +12,8 @@ const components = [
     'orders/CreateOrderView',
     'products/ProductsView',
     'products/components/ProductsTable',
+    'orders/components/OrdersTable',
+    'orders/components/OrderRow',
     'products/components/ProductRow',
 ];
 

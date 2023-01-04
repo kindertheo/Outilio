@@ -1,10 +1,20 @@
 <template>
-
+    <orders-table/>
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
-    name: "OrdersView"
+    name: "OrdersView",
+    async created() {
+        await this.setOrders();
+    },
+    methods: {
+        ...mapActions('OrderStore', [
+            'setOrders'
+        ]),
+    },
 }
 </script>
 
