@@ -15,6 +15,7 @@ const components = [
     'orders/components/OrdersTable',
     'orders/components/OrderRow',
     'products/components/ProductRow',
+    'users/LoginView',
 ];
 
 const addComponent = (app, component) => {

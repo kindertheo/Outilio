@@ -1,10 +1,10 @@
 <template>
     <product-form />
-    <button type="button" @click="this.createProduct()">Enregistrer</button>
+    <button type="button" @click="this.createProduct()" :disabled="this.isFormInvalid">Enregistrer</button>
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
     name: "CreateProductView",
@@ -13,6 +13,15 @@ export default {
             'createProduct'
         ]),
     },
+    computed: {
+        ...mapGetters('ProductStore', [
+            'getProduct'
+        ]),
+        isFormInvalid(){
+            return this.getProduct.name.trim() === '' ||
+                this.getProduct.name.trim().length < 3;
+        }
+    }
 }
 </script>
 

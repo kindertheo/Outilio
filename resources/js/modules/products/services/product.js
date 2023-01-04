@@ -8,8 +8,9 @@ export const product = {
             id: null,
             name: '',
             description: '',
-            priceByDay: 0,
+            priceByDay: 0
         },
+        productImgFile: null
     }),
     mutations: {
         setProducts(state, products) {
@@ -18,22 +19,39 @@ export const product = {
         setProduct(state, product) {
             state.product = product;
         },
+        setProductImgFile(state, imgFile) {
+            state.productImgFile = imgFile;
+        },
     },
     actions: {
         async createProduct({ getters }) {
             const product = getters.getProduct;
+            const imgFile = getters.getProductImgFile;
 
-            await axios.post('/products', {
-                product,
+            let formData = new FormData();
+            formData.append('imgFile', imgFile);
+            formData.append('product', JSON.stringify(product));
+
+            await axios.post('/products', formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             });
 
             window.location.href = '/products';
         },
         async updateProduct({ getters }) {
             const product = getters.getProduct;
+            const imgFile = getters.getProductImgFile;
 
-            await axios.put(`/products/${product.id}`, {
-                product,
+            let formData = new FormData();
+            formData.append('imgFile', imgFile);
+            formData.append('product', JSON.stringify(product));
+
+            await axios.post(`/products/${product.id}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             });
 
             window.location.href = '/products';
@@ -58,6 +76,9 @@ export const product = {
     getters: {
         getProduct(state) {
             return state.product;
+        },
+        getProductImgFile(state) {
+            return state.productImgFile;
         },
         getProducts(state) {
             return state.products;

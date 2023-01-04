@@ -1,6 +1,7 @@
 <template>
     <table>
         <tr>
+            <th></th>
             <th>Nom</th>
             <th>Description</th>
             <th>Prix par jour</th>

@@ -1,6 +1,9 @@
 <template>
     <tr>
         <td>
+            <img v-if="product.img_path" :src="product.img_path" style="max-height: 100px; max-width: 100px; height: auto; width: auto;"/>
+        </td>
+        <td>
             {{ product.name }}
         </td>
         <td>

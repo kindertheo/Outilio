@@ -6,6 +6,7 @@ use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -42,11 +43,24 @@ class ProductController extends Controller
             'product' => 'required'
         ]);
 
+        $product = json_decode($request->product, true);
+        $imgPath = '';
+        $sluggyName = Str::slug($product['name'], '-');
+
+        if($request->imgFile){
+            $filename = "{$sluggyName}.{$request->imgFile->extension()}";
+
+            $request->imgFile->move(public_path('assets'), $filename);
+
+            $imgPath = '/assets/'.$filename;
+        }
+
         $product = Product::create([
-            'name' => $request->product['name'],
-            'sluggy_name' => Str::slug($request->product['name'], '-'),
-            'description' => $request->product['description'],
-            'price_by_day' => $request->product['priceByDay'] * 100,
+            'name' => $product['name'],
+            'sluggy_name' => $sluggyName,
+            'description' => $product['description'],
+            'price_by_day' => $product['priceByDay'] * 100,
+            'img_path' => $imgPath,
             'created_at' => Carbon::now()
         ]);
 
@@ -83,7 +97,8 @@ class ProductController extends Controller
                 'id',
                 'name',
                 'description',
-                'price_by_day'
+                'price_by_day',
+                'img_path'
             )
             ->addSelect(DB::raw('1 as is_available'))
             ->get();
@@ -94,7 +109,8 @@ class ProductController extends Controller
                 'id',
                 'name',
                 'description',
-                'price_by_day'
+                'price_by_day',
+                'img_path'
             )
             ->addSelect(DB::raw('0 as is_available'))
             ->get();
@@ -128,11 +144,27 @@ class ProductController extends Controller
             'product' => 'required'
         ]);
 
+        $updatedProduct = json_decode($request->product, true);
+        $imgPath = $product->img_path;
+        $sluggyName = Str::slug($product['name'], '-');
+
+        if($request->imgFile){
+            $filename = "{$sluggyName}.{$request->imgFile->extension()}";
+
+            if(File::exists(public_path($imgPath)))
+                File::delete(public_path($imgPath));
+
+            $request->imgFile->move(public_path('assets'), $filename);
+
+            $imgPath = '/assets/'.$filename;
+        }
+
         $product->update([
-            'name' => $request->product['name'],
-            'sluggy_name' => Str::slug($request->product['name'], '-'),
-            'description' => $request->product['description'],
-            'price_by_day' => $request->product['priceByDay'] * 100,
+            'name' => $updatedProduct['name'],
+            'sluggy_name' => $sluggyName,
+            'description' => $updatedProduct['description'],
+            'price_by_day' => $updatedProduct['priceByDay'] * 100,
+            'img_path' => $imgPath,
             'updated_at' => Carbon::now()
         ]);
 
@@ -147,6 +179,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        if(File::exists(public_path($product->img_path)))
+            File::delete(public_path($product->img_path));
+
         $product->delete();
     }
 }
