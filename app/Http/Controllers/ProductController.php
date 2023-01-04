@@ -47,7 +47,7 @@ class ProductController extends Controller
         $imgPath = '';
         $sluggyName = Str::slug($product['name'], '-');
 
-        if(!empty($request->imgFile)){
+        if(json_decode($request->imgFile) != null){
             $filename = "{$sluggyName}.{$request->imgFile->extension()}";
 
             $request->imgFile->move(public_path('assets'), $filename);
@@ -148,7 +148,7 @@ class ProductController extends Controller
         $imgPath = $product->img_path;
         $sluggyName = Str::slug($product['name'], '-');
 
-        if(!empty($request->imgFile)){
+        if(json_decode($request->imgFile) != null){
             $filename = "{$sluggyName}.{$request->imgFile->extension()}";
 
             if(File::exists(public_path($imgPath)))
