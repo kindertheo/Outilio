@@ -21,28 +21,32 @@
         <div>
             Etape 3
             <label>Nom</label>
-            <input type="text" v-model="order.customerLastname" />
+            <input type="text" v-model="order.customerLastname" id="lastname" />
 
             <label>Prénom</label>
-            <input type="text" v-model="order.customerFirstname" />
+            <input
+                type="text"
+                v-model="order.customerFirstname"
+                id="firstname"
+            />
 
             <label>Téléphone</label>
-            <input type="text" v-model="order.customerPhone" />
+            <input type="text" v-model="order.customerPhone" id="phone" />
 
             <label>Email</label>
-            <input type="text" v-model="order.customerEmail" />
+            <input type="text" v-model="order.customerEmail" id="email" />
 
             <label>Livraison</label>
             <div class="form-check">
                 <input
                     class="form-check-input"
                     type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
+                    name="freeDeliveryOption"
+                    id="freeDeliveryOption"
                     :value="false"
                     v-model="order.deliveryOption"
                 />
-                <label class="form-check-label" for="flexRadioDefault1">
+                <label class="form-check-label" for="freeDeliveryOption">
                     Livraison gratuite
                 </label>
             </div>
@@ -50,12 +54,12 @@
                 <input
                     class="form-check-input"
                     type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault2"
+                    name="paidDeliveryOption"
+                    id="paidDeliveryOption"
                     :value="true"
                     v-model="order.deliveryOption"
                 />
-                <label class="form-check-label" for="flexRadioDefault2">
+                <label class="form-check-label" for="paidDeliveryOption">
                     Livraison payante
                 </label>
             </div>
@@ -64,12 +68,24 @@
         <div>
             Etape 4 - Récapitulatif
 
-            <div v-for="product in order.products" :key="product.id">
+            <div
+                v-for="product in order.products"
+                :key="product.id"
+                :id="`product-${product.id}`"
+            >
                 {{ product.name }} {{ product.price_by_day / 100 }}
             </div>
 
-            <div>Réduction : Montant total : {{ this.getOrderPrice }}</div>
-            <button type="button" @click="createOrder" :disabled="this.isFormInvalid">Valider</button>
+            <div id="discount">Réduction :</div>
+            <div id="price">Montant total : {{ this.getOrderPrice }}</div>
+            <button
+                type="button"
+                @click="createOrder"
+                :disabled="this.isFormInvalid"
+                id="submitOrder"
+            >
+                Valider
+            </button>
         </div>
     </div>
 </template>
@@ -89,9 +105,17 @@ export default {
         },
         isFormInvalid() {
             return this.order.customerLastname === "" ||
+                !this.order.customerLastname.match(/^[A-zÀ-ú]{3,}$/) ||
                 this.order.customerFirstname === "" ||
+                !this.order.customerFirstname.match(/^[A-zÀ-ú]{3,}$/) ||
                 this.order.customerPhone === "" ||
+                !this.order.customerPhone.match(
+                    /^((\+)33|0)[1-9](\d{2}){4}$/
+                ) ||
                 this.order.customerEmail === "" ||
+                !this.order.customerEmail.match(
+                    /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
+                ) ||
                 this.order.products.length === 0
                 ? true
                 : false;
