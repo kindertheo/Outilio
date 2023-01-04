@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function all()
+    {
+        return Order::with('products')->get();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +20,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return view('orders.index');
     }
 
     /**
@@ -41,13 +46,16 @@ class OrderController extends Controller
         ]);
 
         $order = Order::create([
-            'date' => Carbon::createFromTimeString($request->order['date'])->toDateTimeString(),
+            'date' => Carbon::createFromTimeString($request->order['date'])->toDateString(),
             'delivery_option' => $request->order['deliveryOption'],
+            'is_accepted' => $request->order['isAccepted'],
+            'is_processed' => $request->order['isProcessed'],
             'customer_phone' => $request->order['customerPhone'],
             'customer_email' => $request->order['customerEmail'],
             'customer_firstname' => $request->order['customerFirstname'],
             'customer_lastname' => $request->order['customerLastname'],
             'price' => $request->order['price'],
+            'created_at' => Carbon::now()
         ]);
 
         foreach ($request->order['products'] as $product)
@@ -85,7 +93,23 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $this->validate($request, [
+            'order' => 'required'
+        ]);
+
+        $order->update([
+            'date' => Carbon::createFromTimeString($request->order['date'])->toDateString(),
+            'delivery_option' => $request->order['deliveryOption'],
+            'is_accepted' => $request->order['isAccepted'],
+            'is_processed' => $request->order['isProcessed'],
+            'customer_email' => $request->order['customerEmail'],
+            'customer_firstname' => $request->order['customerFirstname'],
+            'customer_lastname' => $request->order['customerLastname'],
+            'price' => $request->order['price'],
+            'updated_at' => Carbon::now()
+        ]);
+
+        return json_encode(['order' => $order], 201);
     }
 
     /**

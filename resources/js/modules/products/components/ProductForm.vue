@@ -6,16 +6,19 @@
         <input type="text" v-model="product.description" />
         <label>Prix à la journée</label>
         <input type="text" v-model="product.priceByDay" />
-        <button type="button" @click="this.createProduct()">Enregistrer</button>
+        <label>Image</label>
+        <input type="file" @change="onFileChange" accept ="image/png, image/jpeg" />
     </form>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
     name: "ProductForm",
     computed: {
-        ...mapGetters("ProductStore", ["getProduct"]),
+        ...mapGetters('ProductStore', [
+            'getProduct'
+        ]),
         product: {
             get() {
                 return this.getProduct;
@@ -23,8 +26,17 @@ export default {
         },
     },
     methods: {
-        ...mapActions("ProductStore", ["createProduct"]),
-    },
+        ...mapMutations('ProductStore', [
+            'setProductImgFile'
+        ]),
+        onFileChange(e) {
+            const files = e.target.files || e.dataTransfer.files;
+
+            const imgFile = files.length ? files[0] : null;
+
+            this.setProductImgFile(imgFile);
+        },
+    }
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <div>
         Etape 1
-        <v-date-picker v-model="order.date">
+        <v-date-picker v-model="order.date" @dayclick="updateProducts" :min-date='new Date()'>
             <template v-slot="{ inputValue, togglePopover }">
                 <div class="flex items-center">
                     <button class="" @click="togglePopover()">
@@ -68,36 +68,37 @@
         <div>
             Etape 4 - Récapitulatif
 
-            <div
-                v-for="product in order.products"
-                :key="product.id"
-                :id="`product-${product.id}`"
-            >
-                {{ product.name }} {{ product.price_by_day / 100 }}
+            <div v-for="product in order.products" :key="product.id" :id="`product-${product.id}`">
+                {{ product.name }} {{ this.getProductPrice(product.price_by_day) }}
             </div>
 
-            <div id="discount">Réduction :</div>
-            <div id="price">Montant total : {{ this.getOrderPrice }}</div>
-            <button
-                type="button"
-                @click="createOrder"
-                :disabled="this.isFormInvalid"
-                id="submitOrder"
-            >
-                Valider
-            </button>
+            <div v-if="this.getOrder.deliveryOption">
+                Livraison : 20€
+            </div>
+
+            <div v-if="this.getOrder.products.length >= 2">
+                Réduction : -{{ this.getFormattedOrderDiscount }}
+            </div>
+
+            <div>
+                Montant total : {{ this.getFormattedOrderPrice }}
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { product } from "../../products/services/product";
+import getPrice from "../../../utils/getPrice";
 
 export default {
     name: "OrderForm",
     computed: {
-        ...mapGetters("OrderStore", ["getOrder", "getOrderPrice"]),
+        ...mapGetters('OrderStore', [
+            'getOrder',
+            'getFormattedOrderPrice',
+            'getFormattedOrderDiscount'
+        ]),
         order: {
             get() {
                 return this.getOrder;
@@ -122,9 +123,16 @@ export default {
         },
     },
     methods: {
-        ...mapActions("OrderStore", ["createOrder"]),
+        ...mapActions('ProductStore', [
+            'setProducts'
+        ]),
+        getProductPrice(price){
+            return getPrice(price);
+        },
+        async updateProducts(){
+            await this.setProducts();
+        }
     },
-    components: { product },
 };
 </script>
 
