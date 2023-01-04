@@ -92,6 +92,7 @@ class ProductController extends Controller
         $date = Carbon::createFromTimeString($request->date)->toDateString();
 
         $productsAvailables = Product::whereRelation('orders', 'date', '!=', $date)
+            ->orWhereRelation('orders', 'is_processed', false)
             ->orWhereDoesntHave('orders')
             ->select(
                 'id',
