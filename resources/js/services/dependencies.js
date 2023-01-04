@@ -1,6 +1,8 @@
+import store from './store';
 import VCalendar from 'v-calendar';
 
 const dependencies = [
+    store,
     VCalendar
 ]
 
