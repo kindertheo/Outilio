@@ -6,6 +6,7 @@ const {createStore} = require("vuex");
 const modules = [
     'orders/services/order',
     'products/services/product',
+    'users/services/user',
 ];
 
 const modulesArrayToObject = () => {

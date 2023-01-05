@@ -5,10 +5,12 @@ export const product = {
     state: () => ({
         products: [],
         product: {
-            name: "",
-            description: "",
-            priceByDay: 0,
+            id: null,
+            name: '',
+            description: '',
+            priceByDay: 0
         },
+        productImgFile: null
     }),
     mutations: {
         setProducts(state, products) {
@@ -17,28 +19,66 @@ export const product = {
         setProduct(state, product) {
             state.product = product;
         },
+        setProductImgFile(state, imgFile) {
+            state.productImgFile = imgFile;
+        },
     },
     actions: {
         async createProduct({ getters }) {
             const product = getters.getProduct;
+            const imgFile = getters.getProductImgFile;
 
-            await axios.post("/products", {
-                product,
+            let formData = new FormData();
+            formData.append('imgFile', imgFile);
+            formData.append('product', JSON.stringify(product));
+
+            await axios.post('/products', formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             });
 
-            window.location.href = "/products";
+            window.location.href = '/products';
         },
-        async updateProduct({ dispatch, getters }) {},
-        async deleteProduct({ dispatch, getters }) {},
+        async updateProduct({ getters }) {
+            const product = getters.getProduct;
+            const imgFile = getters.getProductImgFile;
 
-        async setProducts({ commit }) {
-            const { data } = await axios.get("/all-products");
+            let formData = new FormData();
+            formData.append('imgFile', imgFile);
+            formData.append('product', JSON.stringify(product));
+
+            await axios.post(`/products/${product.id}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+
+            window.location.href = '/products';
+        },
+        async deleteProduct({ dispatch }, payload) {
+            await axios.delete(`/products/${payload.productId}`);
+
+            await dispatch('setProducts');
+        },
+        async setProducts({ commit, rootGetters }) {
+            const order = rootGetters['OrderStore/getOrder'];
+
+            const { data } = await axios.get('/all-products', {
+                params: {
+                    date: order.date,
+                }
+            });
+
             commit("setProducts", data);
         },
     },
     getters: {
         getProduct(state) {
             return state.product;
+        },
+        getProductImgFile(state) {
+            return state.productImgFile;
         },
         getProducts(state) {
             return state.products;

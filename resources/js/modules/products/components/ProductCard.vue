@@ -6,6 +6,7 @@
         :value="product"
         v-model="order.products"
         autocomplete="off"
+        :disabled="!product.is_available"
     />
     <label
         class="btn btn-outline-primary"
@@ -14,6 +15,7 @@
         {{ product.name }}
         {{ product.description }}
         {{ product.price_by_day / 100 }}
+        <div v-if="!product.is_available">NON DISPO</div>
     </label>
 </template>
 
