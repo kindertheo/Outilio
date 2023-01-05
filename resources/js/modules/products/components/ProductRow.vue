@@ -13,7 +13,7 @@
             {{ getProductPrice(product.price_by_day) }}
         </td>
         <td>
-            <a :href="`/products/${product.id}`">
+            <a :href="$sanitize(`/products/${product.id}`)">
                 Modifier
             </a>
             <button @click="removeProduct">

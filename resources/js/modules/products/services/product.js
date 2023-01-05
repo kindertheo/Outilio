@@ -10,7 +10,8 @@ export const product = {
             description: '',
             priceByDay: 0
         },
-        productImgFile: null
+        productImgFile: null,
+        range: [0, 3]
     }),
     mutations: {
         setProducts(state, products) {
@@ -83,5 +84,8 @@ export const product = {
         getProducts(state) {
             return state.products;
         },
+        getRange(state){
+            return state.range;
+        }
     },
 };

@@ -20,8 +20,8 @@
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link {{ Route::is('orders') ? 'active' : '' }}"
-                       aria-current="{{ Route::is('orders') ? 'page' : '' }}"
+                    <a class="nav-item nav-link {{ Route::is('orders') || Route::is('home') ? 'active' : '' }}"
+                       aria-current="{{ Route::is('orders') || Route::is('home') ? 'page' : '' }}"
                        href="/orders"
                     >
                         Réservations
