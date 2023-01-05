@@ -76,11 +76,11 @@
                 Livraison : 20€
             </div>
 
-            <div v-if="this.getOrder.products.length >= 2">
+            <div id="discsount" v-if="this.getOrder.products.length >= 2">
                 Réduction : -{{ this.getFormattedOrderDiscount }}
             </div>
 
-            <div>
+            <div id="price">
                 Montant total : {{ this.getFormattedOrderPrice }}
             </div>
         </div>
