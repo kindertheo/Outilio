@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-dark px-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
             <svg xmlns="http://www.w3.org/2000/svg" width="122" height="47" viewBox="0 0 122 47" fill="none">
@@ -13,12 +13,33 @@
                 <circle cx="19" cy="22" r="9" fill="#2C2C2C"/>
             </svg>
         </a>
-
         @if(Auth::check())
-            <a href="/logout" class="text-decoration-none btn btn-light shadow- btn-sm">
-                <i class="fa fa-sign-out me-1"></i>
-                Se déconnecter
-            </a>
+            <button type="button" class="navbar-toggler shadow-none" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link {{ Route::is('orders') ? 'active' : '' }}"
+                       aria-current="{{ Route::is('orders') ? 'page' : '' }}"
+                       href="/orders"
+                    >
+                        Réservations
+                    </a>
+                    <a class="nav-item nav-link {{ Route::is('products') || Route::is('products.*') ? 'active' : '' }}"
+                       aria-current="{{ Route::is('products') || Route::is('products.*') ? 'page' : '' }}"
+                       href="/products"
+                    >
+                        Produits
+                    </a>
+                </div>
+                <div class="navbar-nav ms-auto">
+                    <a href="/logout" class="text-decoration-none btn btn-light shadow-non btn-sm">
+                        <i class="fa fa-sign-out me-1"></i>
+                        Se déconnecter
+                    </a>
+                </div>
+            </div>
         @endif
     </div>
 </nav>

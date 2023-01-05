@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kindertheo_Outilio&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=kindertheo_Outilio)
+
 # Quick Start - Outilio
 
 ### Step by step

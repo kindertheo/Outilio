@@ -16,7 +16,7 @@
             <a :href="`/products/${product.id}`">
                 Modifier
             </a>
-            <button @click="this.deleteProduct({productId: product.id})">
+            <button @click="removeProduct">
                 Supprimer
             </button>
         </td>
@@ -26,6 +26,7 @@
 <script>
 import getPrice from "../../../utils/getPrice";
 import {mapActions} from "vuex";
+import Swal from "sweetalert2";
 
 export default {
     name: "ProductRow",
@@ -38,6 +39,37 @@ export default {
         ]),
         getProductPrice(price){
             return getPrice(price);
+        },
+        removeProduct(){
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-danger shadow-none',
+                    cancelButton: 'btn btn-light shadow-none me-3'
+                },
+                buttonsStyling: false
+            });
+
+            swalWithBootstrapButtons.fire({
+                title: 'Êtes-vous sûr?',
+                text: "Vous ne pourrez pas récupérer le produit par la suite.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d46868',
+                cancelButtonColor: '#a1a1a1',
+                cancelButtonText: 'Annuler',
+                confirmButtonText: 'Oui, supprimer le produit.',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.deleteProduct({productId: this.product.id});
+                    Swal.fire(
+                        'Supprimé!',
+                        'Le produit a bien été supprimé',
+                        'success'
+                    )
+                }
+            });
         }
     }
 }

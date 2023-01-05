@@ -23575,7 +23575,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _utils_getPrice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../utils/getPrice */ "./resources/js/utils/getPrice.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -23584,14 +23586,43 @@ function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _ty
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ProductRow",
   props: {
     product: Object
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('ProductStore', ['deleteProduct'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)('ProductStore', ['deleteProduct'])), {}, {
     getProductPrice: function getProductPrice(price) {
       return (0,_utils_getPrice__WEBPACK_IMPORTED_MODULE_0__["default"])(price);
+    },
+    removeProduct: function removeProduct() {
+      var _this = this;
+      var swalWithBootstrapButtons = sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().mixin({
+        customClass: {
+          confirmButton: 'btn btn-danger shadow-none',
+          cancelButton: 'btn btn-light shadow-none me-3'
+        },
+        buttonsStyling: false
+      });
+      swalWithBootstrapButtons.fire({
+        title: 'Êtes-vous sûr?',
+        text: "Vous ne pourrez pas récupérer le produit par la suite.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d46868',
+        cancelButtonColor: '#a1a1a1',
+        cancelButtonText: 'Annuler',
+        confirmButtonText: 'Oui, supprimer le produit.',
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          _this.deleteProduct({
+            productId: _this.product.id
+          });
+          sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire('Supprimé!', 'Le produit a bien été supprimé', 'success');
+        }
+      });
     }
   })
 });
@@ -24478,7 +24509,6 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = ["src"];
 var _hoisted_2 = ["href"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _this = this;
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [$props.product.img_path ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
     key: 0,
     src: $props.product.img_path,
@@ -24491,10 +24521,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8 /* PROPS */, _hoisted_1)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.description), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getProductPrice($props.product.price_by_day)), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "/products/".concat($props.product.id)
   }, " Modifier ", 8 /* PROPS */, _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    onClick: _cache[0] || (_cache[0] = function ($event) {
-      return _this.deleteProduct({
-        productId: $props.product.id
-      });
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.removeProduct && $options.removeProduct.apply($options, arguments);
     })
   }, " Supprimer ")])]);
 }
@@ -24818,9 +24846,6 @@ var order = {
     getOrders: function getOrders(state) {
       return state.orders;
     },
-    getDiscountCoef: function getDiscountCoef(state) {
-      return 1 - state.order.products.length * 8 / 100;
-    },
     getOrderPrice: function getOrderPrice(state) {
       return (0,_utils_getSum__WEBPACK_IMPORTED_MODULE_1__["default"])(state.order.products.map(function (product) {
         return product.price_by_day;
@@ -24828,7 +24853,8 @@ var order = {
     },
     computedDiscount: function computedDiscount(state, getters) {
       var price = getters.getOrderPrice;
-      return price * (state.order.products.length * 0.05);
+      var coef = state.order.products.length * 0.05;
+      return coef > 0.20 ? price * 0.20 : price * coef;
     },
     computedPrice: function computedPrice(state, getters) {
       var price = getters.getOrderPrice;

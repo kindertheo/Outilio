@@ -76,9 +76,6 @@ export const order = {
         getOrders(state){
             return state.orders;
         },
-        getDiscountCoef(state){
-            return 1 - (state.order.products.length * 8) / 100;
-        },
         getOrderPrice(state){
             return getSum(
                 state.order.products.map((product) => product.price_by_day)
@@ -87,7 +84,9 @@ export const order = {
         computedDiscount(state, getters){
             const price = getters.getOrderPrice;
 
-            return price * (state.order.products.length * 0.05);
+            const coef = state.order.products.length * 0.05;
+
+            return coef > 0.20 ? price * 0.20 : price * coef;
         },
         computedPrice(state, getters){
             const price = getters.getOrderPrice;
