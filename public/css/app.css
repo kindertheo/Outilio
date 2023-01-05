@@ -10956,5 +10956,11 @@ textarea.form-control-lg {
     align-items: center;
 }
 
+.footer-layout {
+    bottom:0; left:0; right:0;
+    position:relative;
+    padding: 50px 0px;
+}
+
 
 
