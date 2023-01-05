@@ -122,13 +122,13 @@
                     </div>
                     <div class="row mt-1 ms-1">
                         <div class="form-check">
-                            <input style="scale: 0.85;" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" v-model="order.deliveryOption">
+                            <input style="scale: 0.85;" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" :value="false" v-model="order.deliveryOption">
                             <label style="font-size: 14px; color: #8A8A8A;" class="form-check-label" for="flexRadioDefault1">
                                 Livraison Gratuite : Parking Intermarché MAGNY
                             </label>
                         </div>
                         <div class="form-check">
-                            <input style="scale: 0.85;" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" v-model="order.deliveryOption">
+                            <input style="scale: 0.85;" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" :value="true" v-model="order.deliveryOption">
                             <label style="font-size: 14px; color: #8A8A8A;" class="form-check-label" for="flexRadioDefault2">
                                 20 € Livraison & retrait à domicile dans un rayon maximale qui l’on vous comfirmera
                             </label>

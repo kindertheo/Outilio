@@ -1,45 +1,36 @@
 <template>
-    <table>
+    <table class="table table-striped table-hover" style="height: 80vh">
         <thead>
-            <tr>
-                <th>Client</th>
-                <th>Email</th>
-                <th>Tél.</th>
-                <th>Outils</th>
-                <th>Prix</th>
-                <th>Date</th>
-                <th></th>
-            </tr>
+            <td class="p-3">Client</td>
+            <td class="p-3">Email</td>
+            <td class="p-3">Tél.</td>
+            <td class="p-3">Outils</td>
+            <td class="p-3">Prix</td>
+            <td class="p-3">Date</td>
         </thead>
         <tbody>
             <tr>
-                <td colspan="7">
+                <td colspan="7" class="fw-bold" style="color: #D80000">
                     A traiter
                 </td>
             </tr>
-            <order-row v-for="order of this.notProcessedOrder"
-                       :order="order"
-            />
+            <order-row v-for="order of this.notProcessedOrder" :order="order" />
+        </tbody>
+        <tbody>
+            <tr>
+                <td colspan="7" class="fw-bold" style="color: #FFA012">
+                    Non terminées
+                </td>
+            </tr>
+            <order-row v-for="order of this.notEndedOrders" :order="order" />
         </tbody>
         <tbody>
         <tr>
-            <td colspan="7">
-                Non terminées
-            </td>
-        </tr>
-        <order-row v-for="order of this.notEndedOrders"
-                   :order="order"
-        />
-        </tbody>
-        <tbody>
-        <tr>
-            <td colspan="7">
+            <td colspan="7" class="fw-bold" style="color: #009621">
                 Terminées
             </td>
         </tr>
-        <order-row v-for="order of this.endedOrders"
-                   :order="order"
-        />
+        <order-row v-for="order of this.endedOrders" :order="order" />
         </tbody>
     </table>
 </template>
