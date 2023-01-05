@@ -1,6 +1,26 @@
 <template>
-    <product-form />
-    <button type="button" @click="this.createProduct()" :disabled="this.isFormInvalid">Enregistrer</button>
+    <div class="min-vh-100 d-flex justify-content-center align-items-center">
+        <div class="bg-light rounded p-3 h-100 shadow-sm w-50">
+            <div class="d-flex mb-3">
+                <h5 style="color: #FFA012" class="me-3 mb-0">Produit</h5>
+                <div class="text-muted">
+                    Création d'un produit
+                </div>
+            </div>
+
+            <product-form />
+
+            <div class="mt-3 text-end">
+                <button type="button"
+                        @click="this.createProduct()"
+                        :disabled="this.isFormInvalid"
+                        class="btn btn-success shadow-none"
+                >
+                    Valider
+                </button>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>

@@ -8,27 +8,40 @@
         autocomplete="off"
         :disabled="!product.is_available"
     />
-    <label class="btn d-flex flex-row align-items-center rounded justify-content-between product-card mb-3" :for="`btn-check-outlined-${product.id}`">
-        <div class="w-75 col-10 ms-3 text-start" style="color: #251749">
-            <div class="d-flex flex-row">
-                <div class="me-3">
-                    <h5 class="title-product-card">{{ product.name }}</h5>
-                </div>
+    <label class="btn rounded product-card mb-3 p-3 d-flex justify-content-between" :for="`btn-check-outlined-${product.id}`">
+        <div class="d-flex flex-column">
+            <div class="d-flex align-items-center mb-1">
+                <h5 class="mb-0 me-3">{{ product.name }}</h5>
                 <div v-if="!product.is_available">
                     <span class="badge bg-danger">Non disponible ce jour</span>
                 </div>
+                <div v-else>
+                    <span class="badge bg-success">Disponible</span>
+                </div>
             </div>
-            <p class="price-product-card"><strong>{{ product.price_by_day / 100 }}</strong> / jours</p>
-            <p class="product-card-desc">{{ product.description }}</p>
+            <div class="text-start d-flex mb-3">
+                <div class="fw-bold me-1">
+                    {{ getProductPrice(product.price_by_day) }}
+                </div>
+                <div>
+                    / jour
+                </div>
+            </div>
+            <p class="text-start">
+                {{ product.description }}
+            </p>
         </div>
-        <div class="col-2 me-3">
-            <img :src="product.img_path" class="img-fluid img-product-card" alt="">
+
+        <div class="my-auto me-3">
+            <img :src="product.img_path" style="max-height: 75px; max-width: 75px; height: auto; width: auto;">
         </div>
     </label>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import getPrice from "../../../utils/getPrice";
+
 export default {
     name: "ProductCard",
     props: {
@@ -42,6 +55,11 @@ export default {
             },
         },
     },
+    methods: {
+        getProductPrice(price){
+            return getPrice(price);
+        }
+    }
 };
 </script>
 

@@ -16,6 +16,7 @@ export const order = {
             customerLastname: '',
             isAccepted: false,
             isProcessed: false,
+            acceptDeposit: false,
             products: []
         }
     }),
@@ -30,6 +31,7 @@ export const order = {
             state.order.customerLastname = '';
             state.order.isAccepted = false;
             state.order.isProcessed = false;
+            state.order.acceptDeposit = false;
             state.order.products = [];
         },
         setOrder(state, order){
@@ -75,7 +77,7 @@ export const order = {
             return state.orders;
         },
         getDiscountCoef(state){
-            return 1 - (state.order.products.length * 5) / 100;
+            return 1 - (state.order.products.length * 8) / 100;
         },
         getOrderPrice(state){
             return getSum(
