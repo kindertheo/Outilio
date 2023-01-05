@@ -15,7 +15,7 @@
 
 @include('layouts.navbar')
 
-<div id="app" class="min-vh-100">
+<div id="app">
     @yield('content')
 </div>
 
