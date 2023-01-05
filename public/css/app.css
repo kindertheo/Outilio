@@ -10834,6 +10834,7 @@ textarea.form-control-lg {
 
 .product-card:hover {
     border-color: #FF9900 !important;
+    background-color: var(--bs-btn-bg) !important;
 }
 
 .btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show{
@@ -10869,6 +10870,10 @@ textarea.form-control-lg {
     opacity: 0.5;
 }
 
+.cursor-pointer:hover{
+    cursor: pointer;
+}
+
 .product-card-desc {
     font-size: 13px;
     color: #8E8E8E;
@@ -10877,7 +10882,7 @@ textarea.form-control-lg {
 
 .contain-product-list {
     overflow-y: auto;
-    max-height: 58vh;
+    max-height: 500px;
     overflow-x: hidden;
 }
 
@@ -10903,6 +10908,52 @@ textarea.form-control-lg {
     --scroll-radius: 10px;
     --scroll-track: #dfdfdf;
     --scroll-thumb-color: #BABABA;
+}
+
+.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show{
+    background-color: white !important;
+}
+
+.dropzone__progress{
+    overflow: unset !important;
+}
+
+.dropzone {
+    min-height: 150px !important;
+    max-height: 150px;
+    overflow: auto;
+    background-color: #f8f9fc;
+    border: 0.125rem dashed black !important;
+    border-radius: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.dropzone .dz-message {
+    margin: 4rem 0;
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: 700;
+    color: #343a40;
+}
+.dropzone:hover {
+    background-color: #fff;
+    border-color: #0665d0;
+    cursor: pointer;
+}
+.dropzone:hover .dz-message {
+    color: #0665d0;
+}
+
+.dropzone__progress{
+    display: none !important;
+}
+
+.dropzone__item-thumbnail{
+    display: flex !important;
+    align-items: center;
 }
 
 

@@ -1,9 +1,11 @@
 import store from './store';
 import VCalendar from 'v-calendar';
+import DropZone from 'dropzone-vue';
 
 const dependencies = [
     store,
-    VCalendar
+    VCalendar,
+    DropZone
 ]
 
 const addDependencies = (app) => {

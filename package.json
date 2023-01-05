@@ -22,9 +22,11 @@
         "vue-loader": "^17.0.1"
     },
     "dependencies": {
-        "bootstrap-vue": "^2.23.1",
+        "bootstrap": "^5.2.3",
+        "dropzone-vue": "^0.1.11",
         "v-calendar": "^3.0.0-alpha.8",
-        "vue": "^3.2.45",
+        "vue": "^3.2.36",
+        "vue-currency-input": "^3.0.3",
         "vue-sweetalert2": "^5.0.5",
         "vuex": "^4.0.2"
     }

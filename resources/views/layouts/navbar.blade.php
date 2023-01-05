@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark bg-dark px-5">
+<nav class="navbar navbar-dark bg-dark px-3">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
             <svg xmlns="http://www.w3.org/2000/svg" width="122" height="47" viewBox="0 0 122 47" fill="none">
@@ -15,7 +15,8 @@
         </a>
 
         @if(Auth::check())
-            <a class="btn btn-outline-light" href="/logout">
+            <a href="/logout" class="text-decoration-none btn btn-light shadow- btn-sm">
+                <i class="fa fa-sign-out me-1"></i>
                 Se déconnecter
             </a>
         @endif

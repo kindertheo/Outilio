@@ -1,6 +1,52 @@
 <template>
-    <order-form/>
-    <button type="button" @click="storeOrder" :disabled="this.isFormInvalid">Valider</button>
+    <div class="position-relative p-3">
+        <order-form/>
+
+        <div class="position-sticky sticky-bottom w-100 mt-3">
+            <div class="bg-white d-flex p-3 rounded row align-items-center mx-auto w-100 shadow-sm">
+                <div class="col-6 col-xl-3">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            Livraison :
+                        </div>
+                        <div v-if="this.getOrder.deliveryOption" class="fw-bold ">
+                            20,00 €
+                        </div>
+                        <div v-else class="fw-bold ">
+                            Offerte
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between text-success" v-if="this.getOrder.products.length >= 2">
+                        <div>
+                            Réduction :
+                        </div>
+                        <div class="fw-bold ">
+                            -{{ this.getFormattedOrderDiscount }}
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            Total :
+                        </div>
+                        <div class="fw-bold ">
+                            {{ this.getFormattedOrderPrice }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-xl-9 text-end">
+                    <button type="button"
+                            class="btn btn-success shadow-none"
+                            @click="storeOrder"
+                            :disabled="this.isFormInvalid"
+                    >
+                        Valider ma demande
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -12,12 +58,15 @@ export default {
     computed: {
         ...mapGetters('OrderStore', [
             'getOrder',
+            'getFormattedOrderPrice',
+            'getFormattedOrderDiscount'
         ]),
         isFormInvalid() {
             return this.getOrder.customerLastname === "" ||
                 this.getOrder.customerFirstname === "" ||
                 this.getOrder.customerPhone === "" ||
                 this.getOrder.customerEmail === "" ||
+                !this.getOrder.acceptDeposit ||
                 this.getOrder.products.length === 0;
         },
     },
