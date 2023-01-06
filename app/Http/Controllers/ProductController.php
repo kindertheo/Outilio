@@ -59,6 +59,7 @@ class ProductController extends Controller
             'name' => $product['name'],
             'sluggy_name' => $sluggyName,
             'description' => $product['description'],
+            'mobile_description' => $product['mobileDescription'],
             'price_by_day' => $product['priceByDay'] * 100,
             'img_path' => $imgPath,
             'created_at' => Carbon::now()
@@ -98,6 +99,7 @@ class ProductController extends Controller
                 'id',
                 'name',
                 'description',
+                'mobile_description',
                 'price_by_day',
                 'img_path'
             )
@@ -111,6 +113,7 @@ class ProductController extends Controller
                 'name',
                 'description',
                 'price_by_day',
+                'mobile_description',
                 'img_path'
             )
             ->addSelect(DB::raw('0 as is_available'))
@@ -164,6 +167,7 @@ class ProductController extends Controller
             'name' => $updatedProduct['name'],
             'sluggy_name' => $sluggyName,
             'description' => $updatedProduct['description'],
+            'mobile_description' => $updatedProduct['mobileDescription'],
             'price_by_day' => $updatedProduct['priceByDay'] * 100,
             'img_path' => $imgPath,
             'updated_at' => Carbon::now()

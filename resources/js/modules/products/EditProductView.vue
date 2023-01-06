@@ -36,6 +36,7 @@ export default {
             id: this.product.id,
             name: this.product.name,
             description: this.product.description,
+            mobileDescription: this.product.mobile_description,
             priceByDay: this.product.price_by_day / 100,
         });
     },

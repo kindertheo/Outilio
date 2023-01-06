@@ -17,7 +17,8 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('sluggy_name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
+            $table->text('mobile_description')->nullable();
             $table->integer('price_by_day');
             $table->string('img_path')->nullable();
             $table->timestamps();

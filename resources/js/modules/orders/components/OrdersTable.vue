@@ -1,6 +1,6 @@
 <template>
     <div class="container" style="height: 82vh">
-        <div class="table-responsive mt-4">
+        <div class="table-responsive mt-3 rounded">
             <table class="table table-light table-sm m-10px table-hover">
                 <thead>
                     <tr>
@@ -10,7 +10,7 @@
                         <th class="p-3">Outils</th>
                         <th class="p-3">Prix</th>
                         <th class="p-3">Date</th>
-                        <th class="p-3">Action</th>
+                        <th class="p-3"></th>
                     </tr>
                 </thead>
                 <tbody>
