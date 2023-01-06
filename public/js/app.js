@@ -23158,10 +23158,10 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
   name: "CreateOrderView",
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('OrderStore', ['getOrder', 'getFormattedOrderPrice', 'getFormattedOrderDiscount'])), {}, {
     isFormInvalid: function isFormInvalid() {
-      return this.getOrder.customerLastname === "" || this.getOrder.customerFirstname === "" || this.getOrder.customerPhone === "" || this.getOrder.customerEmail === "" || !this.getOrder.acceptDeposit || this.getOrder.products.length === 0;
+      return this.getOrder.customerLastname === "" || this.getOrder.customerLastname.length < 3 || this.getOrder.customerFirstname === "" || this.getOrder.customerFirstname.length < 3 || this.getOrder.customerPhone === "" || !this.getOrder.customerPhone.match(/^((\+)33|0)[1-9](\d{2}){4}$/) || this.getOrder.customerEmail === "" || !this.getOrder.acceptDeposit || this.getOrder.products.length === 0 || !this.getOrder.customerEmail.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/) || this.getOrder.products.length === 0;
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('OrderStore', ['createOrder'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('OrderStore', ['resetOrder'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)("OrderStore", ["createOrder"])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)("OrderStore", ["resetOrder"])), {}, {
     storeOrder: function storeOrder() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -23172,9 +23172,9 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
               return _this.createOrder();
             case 2:
               sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-                title: 'Votre réservation est prise en compte',
+                title: "Votre réservation est prise en compte",
                 text: "Nous reviendrons vers vous rapidement.",
-                icon: 'success'
+                icon: "success"
               });
             case 3:
             case "end":
@@ -24148,7 +24148,7 @@ var _hoisted_17 = {
   "class": "form-floating w-50 me-3"
 };
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "name"
+  "for": "lastname"
 }, "Nom", -1 /* HOISTED */);
 var _hoisted_19 = {
   "class": "form-floating w-50"
@@ -24166,7 +24166,7 @@ var _hoisted_23 = {
   "class": "form-floating mb-3"
 };
 var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "mail"
+  "for": "email"
 }, "Adresse email", -1 /* HOISTED */);
 var _hoisted_25 = {
   "class": "form-check mb-3"
@@ -24194,7 +24194,7 @@ var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
     "color": "#8A8A8A"
   },
   "class": "form-check-label",
-  "for": "flexRadioDefault1"
+  "for": "freeDeliveryOption"
 }, " Livraison gratuite dans un secteur de 5km autour de Metz ", -1 /* HOISTED */);
 var _hoisted_31 = {
   "class": "form-check"
@@ -24205,7 +24205,7 @@ var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
     "color": "#8A8A8A"
   },
   "class": "form-check-label",
-  "for": "flexRadioDefault2"
+  "for": "paidDeliveryOption"
 }, " Livraison dans un secteur plus eloigné : 20,00 € ", -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -24226,7 +24226,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
         "class": "d-flex align-items-center",
         onClick: togglePopover
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toHandlers)(inputEvents)), [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_7, _hoisted_9))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toHandlers)(inputEvents, true)), [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_7, _hoisted_9))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         "class": "px-2 py-1",
         value: inputValue,
         style: {
@@ -24241,7 +24241,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8 /* PROPS */, ["modelValue", "onDayclick", "min-date"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_products_list)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control shadow-none",
-    id: "name",
+    id: "lastname",
     placeholder: "name",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $options.order.customerLastname = $event;
@@ -24263,9 +24263,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.order.customerPhone = $event;
     })
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.order.customerPhone]]), _hoisted_22]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "email",
+    type: "text",
     "class": "form-control shadow-none",
-    id: "mail",
+    id: "email",
     placeholder: "mail",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $options.order.customerEmail = $event;
@@ -24281,7 +24281,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "form-check-input cursor-pointer shadow-none",
     type: "radio",
     name: "flexRadioDefault",
-    id: "flexRadioDefault1",
+    id: "freeDeliveryOption",
     value: false,
     "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
       return $options.order.deliveryOption = $event;
@@ -24290,7 +24290,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "form-check-input cursor-pointer shadow-none",
     type: "radio",
     name: "flexRadioDefault",
-    id: "flexRadioDefault2",
+    id: "paidDeliveryOption",
     "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $options.order.deliveryOption = $event;
     }),
@@ -24781,11 +24781,10 @@ var _hoisted_3 = {
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "floatingTextarea2"
 }, "Description", -1 /* HOISTED */);
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Glissez ou ");
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "browse"
 }, "cliquez", -1 /* HOISTED */);
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" pour ajouter une image du produit ");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_currency_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("currency-input");
   var _component_DropZone = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DropZone");
@@ -24828,7 +24827,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     multipleUpload: false
   }, {
     message: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_5, _hoisted_6, _hoisted_7];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Glissez ou "), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" pour ajouter une image du produit ")];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["onAddedFile", "onRemovedFile"])]);
@@ -24948,8 +24947,7 @@ var _hoisted_1 = {
     "font-size": "14px"
   }
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Page ");
-var _hoisted_3 = {
+var _hoisted_2 = {
   "class": "fw-bold"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -24958,7 +24956,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.prevPage && $options.prevPage.apply($options, arguments);
     })
-  }, null, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.currentPage), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" sur " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.numberOfPages), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  }, null, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Page "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.currentPage), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" sur " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.numberOfPages), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['fa-solid fa-chevron-right cursor-pointer ms-1', $options.range[1] === this.getProducts.length ? 'd-none' : 'cursor-pointer']),
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.nextPage && $options.nextPage.apply($options, arguments);
