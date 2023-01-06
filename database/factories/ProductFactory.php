@@ -14,8 +14,8 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'sluggy_name' => $this->faker->name,
+            'name' => "Perceuse",
+            'sluggy_name' => "perceuse",
             'description' => $this->faker->text,
             'price_by_day' => $this->faker->numberBetween(10, 25) . "00",
             'img_path' => "/assets/perceuse.jpg"
