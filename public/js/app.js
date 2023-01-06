@@ -24264,7 +24264,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.order.date = $event;
     }),
     onDayclick: $options.updateProducts,
-    "min-date": new Date()
+    "min-date": new Date(),
+    "is-required": true
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function (_ref) {
       var inputValue = _ref.inputValue,

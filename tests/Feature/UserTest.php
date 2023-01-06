@@ -36,18 +36,19 @@ class UserTest extends TestCase
         $user = User::factory()->create();
         Session::start();
         $token = csrf_token();
-        
- 
+
+
         $response = $this->withHeaders([
             'X-CSRF-TOKEN'=>$token
-        ])->postJson('/login', 
+        ])->postJson('/login',
             [
                 "user" => [
                     'email' => $user->email,
                     'password' => $user->password,
-                ]
+                ],
+                'token' => 'HFd3lwJiNGPT8tZXNwd2Z6bTM2KigtQCcyLz4vMy80LzorMSUhKk46MSRqbWFzJiQ2PT9cJiQ2cHlrczM3WSgtRTM2XjwtNDg0Nj0xMjM3WTUvMyYhKktzbHFtdigtMTM2WygtMSN1e2hxVXR2cEJmO2xtcG58MXdMV1pbNzM2KigqRw'
         ]);
- 
+
         $response->assertOk();
         $response = $this->actingAs($user)->get('/');
         $this->assertAuthenticatedAs($user);
@@ -57,29 +58,29 @@ class UserTest extends TestCase
     public function test_users_can_not_authenticate_with_invalid_password()
     {
         $user = User::factory()->create();
- 
+
         $this->postJson('/login', [
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);
- 
+
         $this->assertGuest();
     }
 
     public function test_users_can_not_authenticate_with_good_password_but_invalid_token()
     {
         $user = User::factory()->create();
-        
+
         $response = $this->withHeaders([
             'X-CSRF-TOKEN'=>'wrong-token'
-        ])->postJson('/login', 
+        ])->postJson('/login',
             [
                 "user" => [
                     'email' => $user->email,
                     'password' => $user->password,
                 ]
         ]);
- 
+
         $this->assertGuest();
     }
 }
