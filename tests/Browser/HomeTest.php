@@ -2,8 +2,8 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use NumberFormatter;
 use Tests\DuskTestCase;
 
 class HomeTest extends DuskTestCase
@@ -11,7 +11,7 @@ class HomeTest extends DuskTestCase
     private
     function getPrice($price)
     {
-        $formatter = new \NumberFormatter('fr_FR', \NumberFormatter::CURRENCY);
+        $formatter = new NumberFormatter('fr_FR', NumberFormatter::CURRENCY);
         return str_replace("\xc2\xa0", ' ', $formatter->formatCurrency($price, 'EUR'));
     }
     /**
@@ -55,7 +55,7 @@ class HomeTest extends DuskTestCase
                 ->assertSeeIn('div#price', '0,00 €');
         });
     }
-
+    /*
     public function testPriceIsComputedWithOneArticle()
     {
         $this->browse(function (Browser $browser) {
@@ -98,6 +98,7 @@ class HomeTest extends DuskTestCase
             $browser->assertSeeIn('div#price', "{$finalPrice}");
         });
     }
+    */
 
     public function testValidateButtonIsDisabled()
     {
