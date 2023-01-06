@@ -1,6 +1,12 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kindertheo_Outilio&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=kindertheo_Outilio)
 
-# Quick Start - Outilio
+# Quick Start - Outilio - Group 4
+
+## Functional documentation
+
+[Documentation-Outilio.pdf (16 pages)](https://github.com/kindertheo/Outilio/blob/main/Documentation-Outilio.pdf)
+
+## Installation
 
 ### Step by step
 Clone this Repository
