@@ -4,7 +4,7 @@
 
         <div class="position-sticky sticky-bottom w-100 mt-3">
             <div class="bg-white d-flex p-3 rounded row align-items-center mx-auto w-100 shadow-sm">
-                <div class="col-6 col-xl-3">
+                <div class="col-12 col-xl-3 mb-3 mb-xl-0">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
                             Livraison :
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-xl-9 text-end">
+                <div class="col-12 col-xl-9 text-end">
                     <button type="button"
                             class="btn btn-success shadow-none"
                             @click="storeOrder"

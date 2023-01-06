@@ -3,7 +3,7 @@
         <div class="col-12 col-xl-6 h-100 mb-3 mb-xl-0">
             <div class="bg-light rounded mb-3 p-3 shadow-sm">
                 <div class="d-flex mb-3">
-                    <h5 style="color: #FFA012" class="me-3 mb-0">Étape 1</h5>
+                    <h5 style="color: #FFA012" class="me-3 mb-0 fw-bold">Étape 1</h5>
                     <div class="text-muted">
                         Sélection de la date
                     </div>
@@ -31,7 +31,6 @@
                                 </svg>
                             </div>
 
-<<<<<<< HEAD
                             <input
                                 class="px-2 py-1"
                                 :value="inputValue"
@@ -45,7 +44,7 @@
 
             <div class="bg-light rounded p-3 shadow-sm">
                 <div class="d-flex mb-3">
-                    <h5 style="color: #FFA012" class="me-3 mb-0">Étape 2</h5>
+                    <h5 style="color: #FFA012" class="me-3 mb-0 fw-bold">Étape 2</h5>
                     <div class="text-muted">
                         Sélection des outils
                     </div>
@@ -58,7 +57,7 @@
         <div class="col-12 col-xl-6">
             <div class="bg-light rounded p-3 h-100 shadow-sm">
                 <div class="d-flex mb-3">
-                    <h5 style="color: #FFA012" class="me-3 mb-0">Étape 3</h5>
+                    <h5 style="color: #FFA012" class="me-3 mb-0 fw-bold">Étape 3</h5>
                     <div class="text-muted">
                         Vos informations
                     </div>
@@ -76,7 +75,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control shadow-none" id="phone" placeholder="phone" v-model="order.customerPhone">
+                    <input type="tel" class="form-control shadow-none" id="phone" placeholder="phone" v-model="order.customerPhone">
                     <label for="phone">Téléphone</label>
                 </div>
 

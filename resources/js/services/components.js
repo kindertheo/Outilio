@@ -16,6 +16,7 @@ const components = [
     'orders/components/OrderRow',
     'products/components/ProductRow',
     'products/components/CurrencyInput',
+    'products/components/ProductsPagination',
     'users/LoginView',
 ];
 

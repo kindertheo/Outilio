@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css2?family=KoHo:wght@400;700&display=swap);
 @charset "UTF-8";
 /*!
  * Bootstrap  v5.2.3 (https://getbootstrap.com/)
@@ -10819,6 +10820,10 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+body{
+    font-family: 'KoHo', sans-serif;
+}
+
 .contain-step {
     background-color: #F8F8F8;
 }
@@ -10827,7 +10832,6 @@ textarea.form-control-lg {
     background-color: white;
     border: 3px solid #BABABA;
     cursor: pointer;
-    min-height: 153px;
     width: 98%;
     margin-left: 4px;
 }
@@ -10878,12 +10882,6 @@ textarea.form-control-lg {
     font-size: 13px;
     color: #8E8E8E;
     margin-bottom: 0
-}
-
-.contain-product-list {
-    overflow-y: auto;
-    max-height: 500px;
-    overflow-x: hidden;
 }
 
 .contain-product-list {
@@ -10954,6 +10952,12 @@ textarea.form-control-lg {
 .dropzone__item-thumbnail{
     display: flex !important;
     align-items: center;
+}
+
+.footer-layout {
+    bottom:0; left:0; right:0;
+    position:relative;
+    padding: 50px 0px;
 }
 
 
