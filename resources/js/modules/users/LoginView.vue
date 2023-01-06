@@ -15,7 +15,7 @@
 
             <div class="mt-3 text-end">
                 <button type="button"
-                        @click="this.login()"
+                        @click="this.recaptcha"
                         :disabled="this.isFormInvalid"
                         class="btn btn-dark shadow-none"
                 >
@@ -28,6 +28,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { useReCaptcha } from 'vue-recaptcha-v3'
 
 export default {
     name: "LoginView",
@@ -44,11 +45,27 @@ export default {
     methods: {
         ...mapActions('UserStore', [
             'login'
-        ])
-    }
+        ]),
+        loginUser() {
+            this.login();
+        }
+    },
+    setup() {
+        const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
+
+        const recaptcha = async () => {
+            // (optional) Wait until recaptcha has been loaded.
+            await recaptchaLoaded();
+
+            // Execute reCAPTCHA with action "login".
+            const token = await executeRecaptcha("login");
+
+            console.log(token)
+        };
+
+        return {
+            recaptcha,
+        };
+    },
 }
 </script>
-
-<style scoped>
-
-</style>

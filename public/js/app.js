@@ -23158,10 +23158,10 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
   name: "CreateOrderView",
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('OrderStore', ['getOrder', 'getFormattedOrderPrice', 'getFormattedOrderDiscount'])), {}, {
     isFormInvalid: function isFormInvalid() {
-      return this.getOrder.customerLastname === "" || this.getOrder.customerFirstname === "" || this.getOrder.customerPhone === "" || this.getOrder.customerEmail === "" || !this.getOrder.acceptDeposit || this.getOrder.products.length === 0;
+      return this.getOrder.customerLastname === "" || this.getOrder.customerLastname.length < 3 || this.getOrder.customerFirstname === "" || this.getOrder.customerFirstname.length < 3 || this.getOrder.customerPhone === "" || !this.getOrder.customerPhone.match(/^((\+)33|0)[1-9](\d{2}){4}$/) || this.getOrder.customerEmail === "" || !this.getOrder.acceptDeposit || this.getOrder.products.length === 0 || !this.getOrder.customerEmail.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/) || this.getOrder.products.length === 0;
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('OrderStore', ['createOrder'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('OrderStore', ['resetOrder'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)("OrderStore", ["createOrder"])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)("OrderStore", ["resetOrder"])), {}, {
     storeOrder: function storeOrder() {
       var _this = this;
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -23172,9 +23172,9 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
               return _this.createOrder();
             case 2:
               sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
-                title: 'Votre réservation est prise en compte',
+                title: "Votre réservation est prise en compte",
                 text: "Nous reviendrons vers vous rapidement.",
-                icon: 'success'
+                icon: "success"
               });
             case 3:
             case "end":
@@ -23942,24 +23942,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vue_recaptcha_v3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-recaptcha-v3 */ "./node_modules/vue-recaptcha-v3/dist/ReCaptchaVuePlugin.js");
+/* harmony import */ var vue_recaptcha_v3__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_recaptcha_v3__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "LoginView",
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('UserStore', ['getUser'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('UserStore', ['getUser'])), {}, {
     user: {
       get: function get() {
         return this.getUser;
       }
     }
   }),
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('UserStore', ['login']))
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('UserStore', ['login'])), {}, {
+    loginUser: function loginUser() {
+      this.login();
+    }
+  }),
+  setup: function setup() {
+    var _useReCaptcha = (0,vue_recaptcha_v3__WEBPACK_IMPORTED_MODULE_0__.useReCaptcha)(),
+      executeRecaptcha = _useReCaptcha.executeRecaptcha,
+      recaptchaLoaded = _useReCaptcha.recaptchaLoaded;
+    var recaptcha = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var token;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return recaptchaLoaded();
+            case 2:
+              _context.next = 4;
+              return executeRecaptcha("login");
+            case 4:
+              token = _context.sent;
+              console.log(token);
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }));
+      return function recaptcha() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    return {
+      recaptcha: recaptcha
+    };
+  }
 });
 
 /***/ }),
@@ -24148,7 +24190,7 @@ var _hoisted_17 = {
   "class": "form-floating w-50 me-3"
 };
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "name"
+  "for": "lastname"
 }, "Nom", -1 /* HOISTED */);
 var _hoisted_19 = {
   "class": "form-floating w-50"
@@ -24166,7 +24208,7 @@ var _hoisted_23 = {
   "class": "form-floating mb-3"
 };
 var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "mail"
+  "for": "email"
 }, "Adresse email", -1 /* HOISTED */);
 var _hoisted_25 = {
   "class": "form-check mb-3"
@@ -24194,7 +24236,7 @@ var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
     "color": "#8A8A8A"
   },
   "class": "form-check-label",
-  "for": "flexRadioDefault1"
+  "for": "freeDeliveryOption"
 }, " Livraison gratuite dans un secteur de 5km autour de Metz ", -1 /* HOISTED */);
 var _hoisted_31 = {
   "class": "form-check"
@@ -24205,7 +24247,7 @@ var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
     "color": "#8A8A8A"
   },
   "class": "form-check-label",
-  "for": "flexRadioDefault2"
+  "for": "paidDeliveryOption"
 }, " Livraison dans un secteur plus eloigné : 20,00 € ", -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -24226,7 +24268,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
         "class": "d-flex align-items-center",
         onClick: togglePopover
-      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toHandlers)(inputEvents)), [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_7, _hoisted_9))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toHandlers)(inputEvents, true)), [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", _hoisted_7, _hoisted_9))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
         "class": "px-2 py-1",
         value: inputValue,
         style: {
@@ -24241,7 +24283,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8 /* PROPS */, ["modelValue", "onDayclick", "min-date"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_products_list)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control shadow-none",
-    id: "name",
+    id: "lastname",
     placeholder: "name",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $options.order.customerLastname = $event;
@@ -24263,9 +24305,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.order.customerPhone = $event;
     })
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.order.customerPhone]]), _hoisted_22]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "email",
+    type: "text",
     "class": "form-control shadow-none",
-    id: "mail",
+    id: "email",
     placeholder: "mail",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $options.order.customerEmail = $event;
@@ -24281,7 +24323,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "form-check-input cursor-pointer shadow-none",
     type: "radio",
     name: "flexRadioDefault",
-    id: "flexRadioDefault1",
+    id: "freeDeliveryOption",
     value: false,
     "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
       return $options.order.deliveryOption = $event;
@@ -24290,7 +24332,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "form-check-input cursor-pointer shadow-none",
     type: "radio",
     name: "flexRadioDefault",
-    id: "flexRadioDefault2",
+    id: "paidDeliveryOption",
     "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
       return $options.order.deliveryOption = $event;
     }),
@@ -24781,11 +24823,10 @@ var _hoisted_3 = {
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "floatingTextarea2"
 }, "Description", -1 /* HOISTED */);
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Glissez ou ");
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "browse"
 }, "cliquez", -1 /* HOISTED */);
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" pour ajouter une image du produit ");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_currency_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("currency-input");
   var _component_DropZone = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("DropZone");
@@ -24828,7 +24869,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     multipleUpload: false
   }, {
     message: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_5, _hoisted_6, _hoisted_7];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Glissez ou "), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" pour ajouter une image du produit ")];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["onAddedFile", "onRemovedFile"])]);
@@ -24948,8 +24989,7 @@ var _hoisted_1 = {
     "font-size": "14px"
   }
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Page ");
-var _hoisted_3 = {
+var _hoisted_2 = {
   "class": "fw-bold"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -24958,7 +24998,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.prevPage && $options.prevPage.apply($options, arguments);
     })
-  }, null, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.currentPage), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" sur " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.numberOfPages), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  }, null, 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Page "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.currentPage), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" sur " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.numberOfPages), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['fa-solid fa-chevron-right cursor-pointer ms-1', $options.range[1] === this.getProducts.length ? 'd-none' : 'cursor-pointer']),
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.nextPage && $options.nextPage.apply($options, arguments);
@@ -25062,8 +25102,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.user.password]]), _hoisted_7]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
-    onClick: _cache[2] || (_cache[2] = function ($event) {
-      return _this.login();
+    onClick: _cache[2] || (_cache[2] = function () {
+      return _this.recaptcha && _this.recaptcha.apply(_this, arguments);
     }),
     disabled: this.isFormInvalid,
     "class": "btn btn-dark shadow-none"
@@ -25087,6 +25127,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_dependencies__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/dependencies */ "./resources/js/services/dependencies.js");
 /* harmony import */ var v_calendar_dist_style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! v-calendar/dist/style.css */ "./node_modules/v-calendar/dist/style.css");
 /* harmony import */ var dropzone_vue_dist_dropzone_vue_common_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! dropzone-vue/dist/dropzone-vue.common.css */ "./node_modules/dropzone-vue/dist/dropzone-vue.common.css");
+/* harmony import */ var vue_recaptcha_v3__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-recaptcha-v3 */ "./node_modules/vue-recaptcha-v3/dist/ReCaptchaVuePlugin.js");
+/* harmony import */ var vue_recaptcha_v3__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_recaptcha_v3__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -25100,6 +25143,9 @@ window.axios.defaults.headers.post = {
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_1__.createApp)({});
 (0,_services_components__WEBPACK_IMPORTED_MODULE_2__.addComponents)(app);
 (0,_services_dependencies__WEBPACK_IMPORTED_MODULE_3__.addDependencies)(app);
+app.use(vue_recaptcha_v3__WEBPACK_IMPORTED_MODULE_6__.VueReCaptcha, {
+  siteKey: "toto"
+});
 app.mount('#app');
 
 /***/ }),
@@ -55627,6 +55673,300 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/recaptcha-v3/dist/ReCaptcha.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/recaptcha-v3/dist/ReCaptcha.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ReCaptchaInstance = exports.getInstance = exports.load = void 0;
+var ReCaptchaLoader_1 = __webpack_require__(/*! ./ReCaptchaLoader */ "./node_modules/recaptcha-v3/dist/ReCaptchaLoader.js");
+Object.defineProperty(exports, "load", ({ enumerable: true, get: function () { return ReCaptchaLoader_1.load; } }));
+Object.defineProperty(exports, "getInstance", ({ enumerable: true, get: function () { return ReCaptchaLoader_1.getInstance; } }));
+var ReCaptchaInstance_1 = __webpack_require__(/*! ./ReCaptchaInstance */ "./node_modules/recaptcha-v3/dist/ReCaptchaInstance.js");
+Object.defineProperty(exports, "ReCaptchaInstance", ({ enumerable: true, get: function () { return ReCaptchaInstance_1.ReCaptchaInstance; } }));
+
+
+/***/ }),
+
+/***/ "./node_modules/recaptcha-v3/dist/ReCaptchaInstance.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/recaptcha-v3/dist/ReCaptchaInstance.js ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ReCaptchaInstance = void 0;
+var ReCaptchaInstance = (function () {
+    function ReCaptchaInstance(siteKey, recaptchaID, recaptcha) {
+        this.siteKey = siteKey;
+        this.recaptchaID = recaptchaID;
+        this.recaptcha = recaptcha;
+        this.styleContainer = null;
+    }
+    ReCaptchaInstance.prototype.execute = function (action) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2, this.recaptcha.enterprise ? this.recaptcha.enterprise.execute(this.recaptchaID, { action: action }) : this.recaptcha.execute(this.recaptchaID, { action: action })];
+            });
+        });
+    };
+    ReCaptchaInstance.prototype.getSiteKey = function () {
+        return this.siteKey;
+    };
+    ReCaptchaInstance.prototype.hideBadge = function () {
+        if (this.styleContainer !== null) {
+            return;
+        }
+        this.styleContainer = document.createElement('style');
+        this.styleContainer.innerHTML = '.grecaptcha-badge{visibility:hidden !important;}';
+        document.head.appendChild(this.styleContainer);
+    };
+    ReCaptchaInstance.prototype.showBadge = function () {
+        if (this.styleContainer === null) {
+            return;
+        }
+        document.head.removeChild(this.styleContainer);
+        this.styleContainer = null;
+    };
+    return ReCaptchaInstance;
+}());
+exports.ReCaptchaInstance = ReCaptchaInstance;
+
+
+/***/ }),
+
+/***/ "./node_modules/recaptcha-v3/dist/ReCaptchaLoader.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/recaptcha-v3/dist/ReCaptchaLoader.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getInstance = exports.load = void 0;
+var ReCaptchaInstance_1 = __webpack_require__(/*! ./ReCaptchaInstance */ "./node_modules/recaptcha-v3/dist/ReCaptchaInstance.js");
+var ELoadingState;
+(function (ELoadingState) {
+    ELoadingState[ELoadingState["NOT_LOADED"] = 0] = "NOT_LOADED";
+    ELoadingState[ELoadingState["LOADING"] = 1] = "LOADING";
+    ELoadingState[ELoadingState["LOADED"] = 2] = "LOADED";
+})(ELoadingState || (ELoadingState = {}));
+var ReCaptchaLoader = (function () {
+    function ReCaptchaLoader() {
+    }
+    ReCaptchaLoader.load = function (siteKey, options) {
+        if (options === void 0) { options = {}; }
+        if (typeof document === 'undefined') {
+            return Promise.reject(new Error('This is a library for the browser!'));
+        }
+        if (ReCaptchaLoader.getLoadingState() === ELoadingState.LOADED) {
+            if (ReCaptchaLoader.instance.getSiteKey() === siteKey) {
+                return Promise.resolve(ReCaptchaLoader.instance);
+            }
+            else {
+                return Promise.reject(new Error('reCAPTCHA already loaded with different site key!'));
+            }
+        }
+        if (ReCaptchaLoader.getLoadingState() === ELoadingState.LOADING) {
+            if (siteKey !== ReCaptchaLoader.instanceSiteKey) {
+                return Promise.reject(new Error('reCAPTCHA already loaded with different site key!'));
+            }
+            return new Promise(function (resolve, reject) {
+                ReCaptchaLoader.successfulLoadingConsumers.push(function (instance) { return resolve(instance); });
+                ReCaptchaLoader.errorLoadingRunnable.push(function (reason) { return reject(reason); });
+            });
+        }
+        ReCaptchaLoader.instanceSiteKey = siteKey;
+        ReCaptchaLoader.setLoadingState(ELoadingState.LOADING);
+        var loader = new ReCaptchaLoader();
+        return new Promise(function (resolve, reject) {
+            loader.loadScript(siteKey, options.useRecaptchaNet || false, options.useEnterprise || false, options.renderParameters ? options.renderParameters : {}, options.customUrl).then(function () {
+                ReCaptchaLoader.setLoadingState(ELoadingState.LOADED);
+                var widgetID = loader.doExplicitRender(grecaptcha, siteKey, options.explicitRenderParameters ? options.explicitRenderParameters : {}, options.useEnterprise || false);
+                var instance = new ReCaptchaInstance_1.ReCaptchaInstance(siteKey, widgetID, grecaptcha);
+                ReCaptchaLoader.successfulLoadingConsumers.forEach(function (v) { return v(instance); });
+                ReCaptchaLoader.successfulLoadingConsumers = [];
+                if (options.autoHideBadge) {
+                    instance.hideBadge();
+                }
+                ReCaptchaLoader.instance = instance;
+                resolve(instance);
+            }).catch(function (error) {
+                ReCaptchaLoader.errorLoadingRunnable.forEach(function (v) { return v(error); });
+                ReCaptchaLoader.errorLoadingRunnable = [];
+                reject(error);
+            });
+        });
+    };
+    ReCaptchaLoader.getInstance = function () {
+        return ReCaptchaLoader.instance;
+    };
+    ReCaptchaLoader.setLoadingState = function (state) {
+        ReCaptchaLoader.loadingState = state;
+    };
+    ReCaptchaLoader.getLoadingState = function () {
+        if (ReCaptchaLoader.loadingState === null) {
+            return ELoadingState.NOT_LOADED;
+        }
+        else {
+            return ReCaptchaLoader.loadingState;
+        }
+    };
+    ReCaptchaLoader.prototype.loadScript = function (siteKey, useRecaptchaNet, useEnterprise, renderParameters, customUrl) {
+        var _this = this;
+        if (useRecaptchaNet === void 0) { useRecaptchaNet = false; }
+        if (useEnterprise === void 0) { useEnterprise = false; }
+        if (renderParameters === void 0) { renderParameters = {}; }
+        if (customUrl === void 0) { customUrl = ''; }
+        var scriptElement = document.createElement('script');
+        scriptElement.setAttribute('recaptcha-v3-script', '');
+        var scriptBase = 'https://www.google.com/recaptcha/api.js';
+        if (useRecaptchaNet) {
+            if (useEnterprise) {
+                scriptBase = 'https://recaptcha.net/recaptcha/enterprise.js';
+            }
+            else {
+                scriptBase = 'https://recaptcha.net/recaptcha/api.js';
+            }
+        }
+        if (useEnterprise) {
+            scriptBase = 'https://www.google.com/recaptcha/enterprise.js';
+        }
+        if (customUrl) {
+            scriptBase = customUrl;
+        }
+        if (renderParameters.render) {
+            renderParameters.render = undefined;
+        }
+        var parametersQuery = this.buildQueryString(renderParameters);
+        scriptElement.src = scriptBase + '?render=explicit' + parametersQuery;
+        return new Promise(function (resolve, reject) {
+            scriptElement.addEventListener('load', _this.waitForScriptToLoad(function () {
+                resolve(scriptElement);
+            }, useEnterprise), false);
+            scriptElement.onerror = function (error) {
+                ReCaptchaLoader.setLoadingState(ELoadingState.NOT_LOADED);
+                reject(error);
+            };
+            document.head.appendChild(scriptElement);
+        });
+    };
+    ReCaptchaLoader.prototype.buildQueryString = function (parameters) {
+        var parameterKeys = Object.keys(parameters);
+        if (parameterKeys.length < 1) {
+            return '';
+        }
+        return '&' + Object.keys(parameters)
+            .filter(function (parameterKey) {
+            return !!parameters[parameterKey];
+        })
+            .map(function (parameterKey) {
+            return parameterKey + '=' + parameters[parameterKey];
+        }).join('&');
+    };
+    ReCaptchaLoader.prototype.waitForScriptToLoad = function (callback, useEnterprise) {
+        var _this = this;
+        return function () {
+            if (window.grecaptcha === undefined) {
+                setTimeout(function () {
+                    _this.waitForScriptToLoad(callback, useEnterprise);
+                }, ReCaptchaLoader.SCRIPT_LOAD_DELAY);
+            }
+            else {
+                if (useEnterprise) {
+                    window.grecaptcha.enterprise.ready(function () {
+                        callback();
+                    });
+                }
+                else {
+                    window.grecaptcha.ready(function () {
+                        callback();
+                    });
+                }
+            }
+        };
+    };
+    ReCaptchaLoader.prototype.doExplicitRender = function (grecaptcha, siteKey, parameters, isEnterprise) {
+        var augmentedParameters = {
+            sitekey: siteKey,
+            badge: parameters.badge,
+            size: parameters.size,
+            tabindex: parameters.tabindex
+        };
+        if (parameters.container) {
+            if (isEnterprise) {
+                return grecaptcha.enterprise.render(parameters.container, augmentedParameters);
+            }
+            else {
+                return grecaptcha.render(parameters.container, augmentedParameters);
+            }
+        }
+        else {
+            if (isEnterprise) {
+                return grecaptcha.enterprise.render(augmentedParameters);
+            }
+            else {
+                return grecaptcha.render(augmentedParameters);
+            }
+        }
+    };
+    ReCaptchaLoader.loadingState = null;
+    ReCaptchaLoader.instance = null;
+    ReCaptchaLoader.instanceSiteKey = null;
+    ReCaptchaLoader.successfulLoadingConsumers = [];
+    ReCaptchaLoader.errorLoadingRunnable = [];
+    ReCaptchaLoader.SCRIPT_LOAD_DELAY = 25;
+    return ReCaptchaLoader;
+}());
+exports.load = ReCaptchaLoader.load;
+exports.getInstance = ReCaptchaLoader.getInstance;
+
+
+/***/ }),
+
 /***/ "./node_modules/sanitize-html/index.js":
 /*!*********************************************!*\
   !*** ./node_modules/sanitize-html/index.js ***!
@@ -75771,13 +76111,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _CreateOrderView_vue_vue_type_template_id_d7fc3d9a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateOrderView.vue?vue&type=template&id=d7fc3d9a */ "./resources/js/modules/orders/CreateOrderView.vue?vue&type=template&id=d7fc3d9a");
 /* harmony import */ var _CreateOrderView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateOrderView.vue?vue&type=script&lang=js */ "./resources/js/modules/orders/CreateOrderView.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_CreateOrderView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CreateOrderView_vue_vue_type_template_id_d7fc3d9a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/orders/CreateOrderView.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_CreateOrderView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CreateOrderView_vue_vue_type_template_id_d7fc3d9a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/orders/CreateOrderView.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -75799,13 +76139,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _OrdersView_vue_vue_type_template_id_0d9374c4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OrdersView.vue?vue&type=template&id=0d9374c4 */ "./resources/js/modules/orders/OrdersView.vue?vue&type=template&id=0d9374c4");
 /* harmony import */ var _OrdersView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OrdersView.vue?vue&type=script&lang=js */ "./resources/js/modules/orders/OrdersView.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_OrdersView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_OrdersView_vue_vue_type_template_id_0d9374c4__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/orders/OrdersView.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_OrdersView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_OrdersView_vue_vue_type_template_id_0d9374c4__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/orders/OrdersView.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -75827,13 +76167,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _OrderForm_vue_vue_type_template_id_bbf8a5a6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OrderForm.vue?vue&type=template&id=bbf8a5a6 */ "./resources/js/modules/orders/components/OrderForm.vue?vue&type=template&id=bbf8a5a6");
 /* harmony import */ var _OrderForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OrderForm.vue?vue&type=script&lang=js */ "./resources/js/modules/orders/components/OrderForm.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_OrderForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_OrderForm_vue_vue_type_template_id_bbf8a5a6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/orders/components/OrderForm.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_OrderForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_OrderForm_vue_vue_type_template_id_bbf8a5a6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/orders/components/OrderForm.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -75855,13 +76195,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _OrderRow_vue_vue_type_template_id_56e54181__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OrderRow.vue?vue&type=template&id=56e54181 */ "./resources/js/modules/orders/components/OrderRow.vue?vue&type=template&id=56e54181");
 /* harmony import */ var _OrderRow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OrderRow.vue?vue&type=script&lang=js */ "./resources/js/modules/orders/components/OrderRow.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_OrderRow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_OrderRow_vue_vue_type_template_id_56e54181__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/orders/components/OrderRow.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_OrderRow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_OrderRow_vue_vue_type_template_id_56e54181__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/orders/components/OrderRow.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -75883,13 +76223,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _OrdersTable_vue_vue_type_template_id_8b3aa8b8__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OrdersTable.vue?vue&type=template&id=8b3aa8b8 */ "./resources/js/modules/orders/components/OrdersTable.vue?vue&type=template&id=8b3aa8b8");
 /* harmony import */ var _OrdersTable_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OrdersTable.vue?vue&type=script&lang=js */ "./resources/js/modules/orders/components/OrdersTable.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_OrdersTable_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_OrdersTable_vue_vue_type_template_id_8b3aa8b8__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/orders/components/OrdersTable.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_OrdersTable_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_OrdersTable_vue_vue_type_template_id_8b3aa8b8__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/orders/components/OrdersTable.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -75911,13 +76251,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _CreateProductView_vue_vue_type_template_id_38c8a593__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateProductView.vue?vue&type=template&id=38c8a593 */ "./resources/js/modules/products/CreateProductView.vue?vue&type=template&id=38c8a593");
 /* harmony import */ var _CreateProductView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateProductView.vue?vue&type=script&lang=js */ "./resources/js/modules/products/CreateProductView.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_CreateProductView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CreateProductView_vue_vue_type_template_id_38c8a593__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/CreateProductView.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_CreateProductView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CreateProductView_vue_vue_type_template_id_38c8a593__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/CreateProductView.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -75939,13 +76279,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _EditProductView_vue_vue_type_template_id_3f1c5785__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditProductView.vue?vue&type=template&id=3f1c5785 */ "./resources/js/modules/products/EditProductView.vue?vue&type=template&id=3f1c5785");
 /* harmony import */ var _EditProductView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditProductView.vue?vue&type=script&lang=js */ "./resources/js/modules/products/EditProductView.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_EditProductView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_EditProductView_vue_vue_type_template_id_3f1c5785__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/EditProductView.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_EditProductView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_EditProductView_vue_vue_type_template_id_3f1c5785__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/EditProductView.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -75967,13 +76307,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ProductsView_vue_vue_type_template_id_46d2d0fe__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductsView.vue?vue&type=template&id=46d2d0fe */ "./resources/js/modules/products/ProductsView.vue?vue&type=template&id=46d2d0fe");
 /* harmony import */ var _ProductsView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductsView.vue?vue&type=script&lang=js */ "./resources/js/modules/products/ProductsView.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductsView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductsView_vue_vue_type_template_id_46d2d0fe__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/ProductsView.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductsView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductsView_vue_vue_type_template_id_46d2d0fe__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/ProductsView.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -75995,13 +76335,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _CurrencyInput_vue_vue_type_template_id_4de39a95__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CurrencyInput.vue?vue&type=template&id=4de39a95 */ "./resources/js/modules/products/components/CurrencyInput.vue?vue&type=template&id=4de39a95");
 /* harmony import */ var _CurrencyInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CurrencyInput.vue?vue&type=script&lang=js */ "./resources/js/modules/products/components/CurrencyInput.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_CurrencyInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CurrencyInput_vue_vue_type_template_id_4de39a95__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/CurrencyInput.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_CurrencyInput_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_CurrencyInput_vue_vue_type_template_id_4de39a95__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/CurrencyInput.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -76023,13 +76363,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ProductCard_vue_vue_type_template_id_97eaea0a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductCard.vue?vue&type=template&id=97eaea0a */ "./resources/js/modules/products/components/ProductCard.vue?vue&type=template&id=97eaea0a");
 /* harmony import */ var _ProductCard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductCard.vue?vue&type=script&lang=js */ "./resources/js/modules/products/components/ProductCard.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductCard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductCard_vue_vue_type_template_id_97eaea0a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/ProductCard.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductCard_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductCard_vue_vue_type_template_id_97eaea0a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/ProductCard.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -76051,13 +76391,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ProductForm_vue_vue_type_template_id_5e77baa2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductForm.vue?vue&type=template&id=5e77baa2 */ "./resources/js/modules/products/components/ProductForm.vue?vue&type=template&id=5e77baa2");
 /* harmony import */ var _ProductForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductForm.vue?vue&type=script&lang=js */ "./resources/js/modules/products/components/ProductForm.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductForm_vue_vue_type_template_id_5e77baa2__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/ProductForm.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductForm_vue_vue_type_template_id_5e77baa2__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/ProductForm.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -76079,13 +76419,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ProductRow_vue_vue_type_template_id_375f13bf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductRow.vue?vue&type=template&id=375f13bf */ "./resources/js/modules/products/components/ProductRow.vue?vue&type=template&id=375f13bf");
 /* harmony import */ var _ProductRow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductRow.vue?vue&type=script&lang=js */ "./resources/js/modules/products/components/ProductRow.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductRow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductRow_vue_vue_type_template_id_375f13bf__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/ProductRow.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductRow_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductRow_vue_vue_type_template_id_375f13bf__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/ProductRow.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -76107,13 +76447,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ProductsList_vue_vue_type_template_id_55dd4af6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductsList.vue?vue&type=template&id=55dd4af6 */ "./resources/js/modules/products/components/ProductsList.vue?vue&type=template&id=55dd4af6");
 /* harmony import */ var _ProductsList_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductsList.vue?vue&type=script&lang=js */ "./resources/js/modules/products/components/ProductsList.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductsList_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductsList_vue_vue_type_template_id_55dd4af6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/ProductsList.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductsList_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductsList_vue_vue_type_template_id_55dd4af6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/ProductsList.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -76135,13 +76475,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ProductsPagination_vue_vue_type_template_id_f090381c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductsPagination.vue?vue&type=template&id=f090381c */ "./resources/js/modules/products/components/ProductsPagination.vue?vue&type=template&id=f090381c");
 /* harmony import */ var _ProductsPagination_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductsPagination.vue?vue&type=script&lang=js */ "./resources/js/modules/products/components/ProductsPagination.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductsPagination_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductsPagination_vue_vue_type_template_id_f090381c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/ProductsPagination.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductsPagination_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductsPagination_vue_vue_type_template_id_f090381c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/ProductsPagination.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -76163,13 +76503,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ProductsTable_vue_vue_type_template_id_3adbc8a6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductsTable.vue?vue&type=template&id=3adbc8a6 */ "./resources/js/modules/products/components/ProductsTable.vue?vue&type=template&id=3adbc8a6");
 /* harmony import */ var _ProductsTable_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProductsTable.vue?vue&type=script&lang=js */ "./resources/js/modules/products/components/ProductsTable.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductsTable_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductsTable_vue_vue_type_template_id_3adbc8a6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/ProductsTable.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_ProductsTable_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_ProductsTable_vue_vue_type_template_id_3adbc8a6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/products/components/ProductsTable.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -76191,13 +76531,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _LoginView_vue_vue_type_template_id_dfc32b9e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoginView.vue?vue&type=template&id=dfc32b9e */ "./resources/js/modules/users/LoginView.vue?vue&type=template&id=dfc32b9e");
 /* harmony import */ var _LoginView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoginView.vue?vue&type=script&lang=js */ "./resources/js/modules/users/LoginView.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_Eliott_Desktop_Biblioth_ques_Metz_Numeric_School_M2I_1_re_ann_e_Architecture_Logiciel_Janvier_2023_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LoginView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LoginView_vue_vue_type_template_id_dfc32b9e__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/users/LoginView.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_xampp_htdocs_Outilio_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_LoginView_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_LoginView_vue_vue_type_template_id_dfc32b9e__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/modules/users/LoginView.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -76714,6 +77054,123 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LoginView_vue_vue_type_template_id_dfc32b9e__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LoginView_vue_vue_type_template_id_dfc32b9e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LoginView.vue?vue&type=template&id=dfc32b9e */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/modules/users/LoginView.vue?vue&type=template&id=dfc32b9e");
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-recaptcha-v3/dist/ReCaptchaVuePlugin.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/vue-recaptcha-v3/dist/ReCaptchaVuePlugin.js ***!
+  \******************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.useReCaptcha = exports.VueReCaptcha = void 0;
+var recaptcha_v3_1 = __webpack_require__(/*! recaptcha-v3 */ "./node_modules/recaptcha-v3/dist/ReCaptcha.js");
+var vue_1 = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+var VueReCaptchaInjectKey = Symbol('VueReCaptchaInjectKey');
+var globalConfig = {
+    loadedWaiters: [],
+    error: null
+};
+exports.VueReCaptcha = {
+    install: function (app, options) {
+        var isLoaded = vue_1.ref(false);
+        var instance = vue_1.ref(undefined);
+        app.config.globalProperties.$recaptchaLoaded = recaptchaLoaded(isLoaded);
+        initializeReCaptcha(options).then(function (wrapper) {
+            isLoaded.value = true;
+            instance.value = wrapper;
+            app.config.globalProperties.$recaptcha = recaptcha(instance);
+            app.config.globalProperties.$recaptchaInstance = instance;
+            globalConfig.loadedWaiters.forEach(function (v) { return v.resolve(true); });
+        }).catch(function (error) {
+            globalConfig.error = error;
+            globalConfig.loadedWaiters.forEach(function (v) { return v.reject(error); });
+        });
+        app.provide(VueReCaptchaInjectKey, {
+            instance: instance,
+            isLoaded: isLoaded,
+            executeRecaptcha: recaptcha(instance),
+            recaptchaLoaded: recaptchaLoaded(isLoaded)
+        });
+    }
+};
+function useReCaptcha() {
+    return vue_1.inject(VueReCaptchaInjectKey);
+}
+exports.useReCaptcha = useReCaptcha;
+function initializeReCaptcha(options) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4, recaptcha_v3_1.load(options.siteKey, options.loaderOptions)];
+                case 1: return [2, _a.sent()];
+            }
+        });
+    });
+}
+function recaptchaLoaded(isLoaded) {
+    return function () { return new Promise(function (resolve, reject) {
+        if (globalConfig.error !== null) {
+            return reject(globalConfig.error);
+        }
+        if (isLoaded.value) {
+            return resolve(true);
+        }
+        globalConfig.loadedWaiters.push({ resolve: resolve, reject: reject });
+    }); };
+}
+function recaptcha(instance) {
+    var _this = this;
+    return function (action) { return __awaiter(_this, void 0, void 0, function () {
+        var _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0: return [4, ((_a = instance.value) === null || _a === void 0 ? void 0 : _a.execute(action))];
+                case 1: return [2, _b.sent()];
+            }
+        });
+    }); };
+}
 
 
 /***/ }),

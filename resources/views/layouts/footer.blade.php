@@ -1,4 +1,4 @@
-<footer class="d-flex justify-content-between align-items-center p-3 footer-layout">
+<footer class="d-flex justify-content-between align-items-center p-2 footer-layout">
 
     <a class="navbar-brand" href="/">
         <svg xmlns="http://www.w3.org/2000/svg" width="123" height="47" viewBox="0 0 123 47" fill="none">
@@ -15,7 +15,7 @@
     </a>
 
     <a class="navbar-brand" href="#" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 32 32" fill="none">
             <path d="M27 3.66675H4.99996C4.64634 3.66675 4.3072 3.80722 4.05715 4.05727C3.8071 4.30732 3.66663 4.64646 3.66663 5.00008V27.0001C3.66663 27.3537 3.8071 27.6928 4.05715 27.9429C4.3072 28.1929 4.64634 28.3334 4.99996 28.3334H27C27.3536 28.3334 27.6927 28.1929 27.9428 27.9429C28.1928 27.6928 28.3333 27.3537 28.3333 27.0001V5.00008C28.3333 4.64646 28.1928 4.30732 27.9428 4.05727C27.6927 3.80722 27.3536 3.66675 27 3.66675V3.66675Z" stroke="#2C2C2C" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M28.3333 13.6668H16.3333C15.9829 13.666 15.6358 13.7344 15.3119 13.8681C14.988 14.0019 14.6937 14.1983 14.4459 14.446C14.1981 14.6938 14.0017 14.9881 13.868 15.312C13.7343 15.6359 13.6658 15.983 13.6666 16.3334V28.3334L28.3333 13.6668Z" stroke="#2C2C2C" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
