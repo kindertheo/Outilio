@@ -14,9 +14,20 @@ cd outilio/
 cp .env.example .env
 ```
 
-Change DB_DATABASE=laravel in .env file
+Change DB_DATABASE in .env file
 ```sh
 DB_DATABASE=outilio_db
+```
+
+Change APP_URL in .env file
+```sh
+APP_URL=http://localhost:8000
+```
+
+Add recaptcha secret and url in .env file
+```sh
+RECAPTCHA_URL="https://www.google.com/recaptcha/api/siteverify"
+RECAPTCHA_SECRET_KEY=6Lfjf9YjAAAAAA4KiJ-ZhMRXu6o0vENT-4O0piBS
 ```
 
 #### Then create database in your phpmyadmin
