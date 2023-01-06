@@ -12,14 +12,16 @@ export const user = {
 
     },
     actions: {
-        async login({ getters }) {
+        async login({ getters }, payload) {
             const user = getters.getUser;
 
-            await axios.post('/login', {
+            const { data } = await axios.post('/login', {
                 user,
+                token: payload.token
             });
 
-            window.location.href = '/orders';
+            if(data[0] === 'success')
+                window.location.href = '/orders';
         },
     },
     getters: {

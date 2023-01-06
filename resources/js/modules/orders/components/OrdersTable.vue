@@ -1,6 +1,6 @@
 <template>
     <div class="table-responsive shadow-sm rounded-bottom" style="height: 90vh">
-            <table class="table table-sm table-hover">
+        <table class="table table-sm table-hover">
                 <thead style="position: sticky; top: 0px; background-color: #FFFFFF">
                     <tr>
                         <th class="p-3">Client</th>
@@ -37,7 +37,7 @@
                     <order-row v-for="order of this.endedOrders" :order="order" />
                 </tbody>
             </table>
-        </div>
+    </div>
 </template>
 
 <script>
@@ -67,7 +67,3 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-
-</style>

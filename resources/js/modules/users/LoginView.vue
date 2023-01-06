@@ -15,8 +15,7 @@
 
             <div class="mt-3 text-end">
                 <button type="button"
-                        @click="this.login()"
-                        :disabled="this.isFormInvalid"
+                        @click="this.loginUser()"
                         class="btn btn-dark shadow-none"
                 >
                     Se connecter
@@ -44,11 +43,16 @@ export default {
     methods: {
         ...mapActions('UserStore', [
             'login'
-        ])
-    }
+        ]),
+        async loginUser() {
+            await this.$recaptchaLoaded()
+
+            const token = await this.$recaptcha('login');
+
+            await this.login({
+                token
+            });
+        }
+    },
 }
 </script>
-
-<style scoped>
-
-</style>
