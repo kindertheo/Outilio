@@ -11,6 +11,8 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
+    protected $hidden = ['sluggy_name', 'created_at', 'updated_at'];
+
     public function orders(){
         return $this->belongsToMany(Order::class, 'product_order');
     }

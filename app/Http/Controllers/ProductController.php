@@ -95,27 +95,13 @@ class ProductController extends Controller
         $productsAvailables = Product::whereRelation('orders', 'date', '!=', $date)
             ->orWhereRelation('orders', 'is_processed', false)
             ->orWhereDoesntHave('orders')
-            ->select(
-                'id',
-                'name',
-                'description',
-                'mobile_description',
-                'price_by_day',
-                'img_path'
-            )
+            ->select()
             ->addSelect(DB::raw('1 as is_available'))
             ->get();
 
         $productsNotAvailables = Product::whereRelation('orders', 'date', '=', $date)
             ->whereRelation('orders', 'is_accepted', true)
-            ->select(
-                'id',
-                'name',
-                'description',
-                'price_by_day',
-                'mobile_description',
-                'img_path'
-            )
+            ->select()
             ->addSelect(DB::raw('0 as is_available'))
             ->get();
 

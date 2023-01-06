@@ -1,46 +1,48 @@
 <template>
     <tr>
-        <td>
+        <td class="p-3">
             {{ order.customer_full_name }}
         </td>
-        <td>
+        <td class="p-3">
             {{ order.customer_email }}
         </td>
-        <td>
+        <td class="p-3">
             {{ order.customer_phone }}
         </td>
-        <td>
-            Outils
+        <td class="p-3">
+            <p style="margin-bottom: 0 !important;" v-for="product in order.products">
+                {{ product.name }}
+            </p>
         </td>
-        <td>
+        <td class="p-3">
             {{ getOrderPrice(order.price) }}
         </td>
-        <td>
+        <td class="p-3">
             {{ new Date(order.date).toLocaleDateString() }}
         </td>
-        <td>
-            <div v-if="!order.is_processed && !order.is_ended">
-                <button type="button" @click="declineOrder">
+        <td class="p-3">
+            <div class="d-flex align-items-center" v-if="!order.is_processed && !order.is_ended">
+                <button class="btn btn-sm btn-outline-danger me-1" type="button" @click="declineOrder">
                     Refuser
                 </button>
-                <button type="button" @click="acceptOrder">
+                <button class="btn btn-sm btn-success" type="button" @click="acceptOrder">
                     Accepter
                 </button>
             </div>
 
-            <div v-else>
-                <div v-if="order.is_accepted">
+            <div class="d-flex flex-row align-items-center justify-content-evenly" v-else>
+                <span class="badge bg-success" v-if="order.is_accepted">
                     Acceptée
-                </div>
-                <div v-else-if="order.is_processed">
+                </span>
+                <span class="badge bg-danger" v-else-if="order.is_processed">
                     Refusée
-                </div>
-                <div v-else>
+                </span>
+                <div class="badge bg-warning text-dark" v-else>
                     Non traitée
                 </div>
-                <button v-if="!order.is_ended" type="button" @click="cancelOrder">
+                <div class="text-muted text-decoration-underline ms-1" v-if="!order.is_ended" type="button" @click="cancelOrder">
                     Annuler
-                </button>
+                </div>
             </div>
         </td>
     </tr>

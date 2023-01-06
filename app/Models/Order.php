@@ -11,10 +11,13 @@ class Order extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
     protected $appends = [
         'customer_full_name',
         'is_ended'
     ];
+
+    protected $hidden = ['created_at', 'updated_at'];
 
     public function products(){
         return $this->belongsToMany(Product::class, 'product_order');

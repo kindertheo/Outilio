@@ -1,23 +1,30 @@
 <template>
     <tr>
-        <td>
-            <img v-if="product.img_path" :src="product.img_path" style="max-height: 100px; max-width: 100px; height: auto; width: auto;"/>
+        <td class="p-3 text-center">
+            <img v-if="product.img_path" :src="product.img_path" style="max-height: 75px; max-width: 75px; height: auto; width: auto;"/>
         </td>
-        <td>
+        <td class="p-3">
             {{ product.name }}
         </td>
-        <td>
-            {{ product.description }}
+        <td class="p-3">
+            <p v-html="$sanitize(product.description)"
+               style="-webkit-line-clamp: 3;display: -webkit-box;  -webkit-box-orient: vertical;overflow: hidden;">
+            </p>
         </td>
-        <td>
+        <td class="p-3">
+            <p v-html="$sanitize(product.mobile_description)"
+               style="-webkit-line-clamp: 3;display: -webkit-box;  -webkit-box-orient: vertical;overflow: hidden;">
+            </p>
+        </td>
+        <td class="p-3">
             {{ getProductPrice(product.price_by_day) }}
         </td>
-        <td>
-            <a :href="$sanitize(`/products/${product.id}`)">
-                Modifier
+        <td class="p-3">
+            <a :href="$sanitize(`/products/${product.id}`)" class="btn btn-sm btn-primary shadow-none me-1">
+                <i class="fa fa-edit-pen"></i> Modifier
             </a>
-            <button @click="removeProduct">
-                Supprimer
+            <button @click="removeProduct" class="btn btn-sm btn-danger shadow-none">
+                <i class="fa fa-trash"></i>
             </button>
         </td>
     </tr>

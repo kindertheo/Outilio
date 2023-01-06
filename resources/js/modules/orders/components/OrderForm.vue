@@ -65,8 +65,8 @@
 
                 <div class="d-flex w-100 mb-3">
                     <div class="form-floating w-50 me-3">
-                        <input type="text" class="form-control shadow-none" id="name" placeholder="name" v-model="order.customerLastname">
-                        <label for="name">Nom</label>
+                        <input type="text" class="form-control shadow-none" id="lastname" placeholder="name" v-model="order.customerLastname">
+                        <label for="lastname">Nom</label>
                     </div>
                     <div class="form-floating w-50">
                         <input type="text" class="form-control shadow-none" id="firstname" placeholder="firstname" v-model="order.customerFirstname">
@@ -80,8 +80,8 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control shadow-none" id="mail" placeholder="mail" v-model="order.customerEmail">
-                    <label for="mail">Adresse email</label>
+                    <input type="text" class="form-control shadow-none" id="email" placeholder="mail" v-model="order.customerEmail">
+                    <label for="email">Adresse email</label>
                 </div>
 
                 <div class="form-check mb-3">
@@ -97,20 +97,20 @@
 
                 <div class="row mt-1 ms-1">
                     <div class="form-check">
-                        <input class="form-check-input cursor-pointer shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                        <input class="form-check-input cursor-pointer shadow-none" type="radio" name="flexRadioDefault" id="freeDeliveryOption"
                                :value="false"
                                v-model="order.deliveryOption"
                         >
-                        <label style="font-size: 14px; color: #8A8A8A;" class="form-check-label" for="flexRadioDefault1">
+                        <label style="font-size: 14px; color: #8A8A8A;" class="form-check-label" for="freeDeliveryOption">
                             Livraison gratuite dans un secteur de 5km autour de Metz
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input cursor-pointer shadow-none" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
+                        <input class="form-check-input cursor-pointer shadow-none" type="radio" name="flexRadioDefault" id="paidDeliveryOption"
                                v-model="order.deliveryOption"
                                :value="true"
                         >
-                        <label style="font-size: 14px; color: #8A8A8A;" class="form-check-label" for="flexRadioDefault2">
+                        <label style="font-size: 14px; color: #8A8A8A;" class="form-check-label" for="paidDeliveryOption">
                             Livraison dans un secteur plus eloigné : 20,00 €
                         </label>
                     </div>

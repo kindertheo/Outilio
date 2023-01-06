@@ -1,33 +1,21 @@
 <template>
-    <div class="container" style="height: 82vh">
-        <div class="table-responsive mt-3 rounded">
-            <table class="table table-light table-sm m-10px table-hover">
-                <thead>
-                <tr>
-                    <th class="p-3"></th>
-                    <th class="p-3">Nom</th>
-                    <th class="p-3">Description</th>
-                    <th class="p-3">Prix par jour</th>
-                    <th class="p-3"></th>
-                </tr>
-                </thead>
-                <tbody>
-                    <product-row v-for="product of this.getProducts" :product="product"/>
-                </tbody>
-            </table>
-        </div>
+    <div class="table-responsive shadow-sm rounded-bottom" style="height: 90vh">
+        <table class="table table-sm table-hover">
+            <thead style="position: sticky; top: 0px; background-color: #FFFFFF">
+            <tr>
+                <th class="p-3" style="width: 15%;"></th>
+                <th class="p-3" style="width: 15%;">Nom</th>
+                <th class="p-3" style="width: 25%;">Description</th>
+                <th class="p-3" style="width: 15%;">Description Mobile</th>
+                <th class="p-3" style="width: 15%;">Prix / Jour</th>
+                <th class="p-3" style="width: 15%;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <product-row v-for="product of this.getProducts" :product="product"/>
+            </tbody>
+        </table>
     </div>
-
-    <table>
-        <tr>
-            <th></th>
-            <th>Nom</th>
-            <th>Description</th>
-            <th>Prix par jour</th>
-            <th></th>
-        </tr>
-        <product-row v-for="product of this.getProducts" :product="product"/>
-    </table>
 </template>
 
 <script>
