@@ -6,8 +6,13 @@
         </div>
 
         <div class="form-floating mb-3">
-            <textarea class="form-control shadow-none" placeholder="Description" id="floatingTextarea2" style="height: 100px; resize: none;" v-model="product.description"></textarea>
+            <textarea class="form-control shadow-none" placeholder="Description" id="floatingTextarea2" style="height: 150px; resize: none;" v-model="product.description"></textarea>
             <label for="floatingTextarea2">Description</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <textarea class="form-control shadow-none" placeholder="Description pour mobile" id="floatingTextarea3" style="height: 100px; resize: none;" v-model="product.mobileDescription"></textarea>
+            <label for="floatingTextarea3">Description pour mobile</label>
         </div>
 
         <currency-input

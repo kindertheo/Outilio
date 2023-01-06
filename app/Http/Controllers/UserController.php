@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
@@ -21,7 +22,8 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'user' => 'required'
+            'user' => 'required',
+            'token' => 'required'
         ]);
 
         $credentials = [
@@ -29,11 +31,18 @@ class UserController extends Controller
             'password' => $request->user['password']
         ];
 
-        if (Auth::attempt($credentials)) {
+        $recaptchaResult = Http::asForm()->post(env('RECAPTCHA_URL'), [
+            'secret' => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->token,
+        ])->json();
+
+        if($recaptchaResult['success'] && $recaptchaResult['score'] > 0.5 && Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             return json_encode(['success'],201);
         }
+
+        return json_encode(['error'],500);
     }
 
     public function logout(){

@@ -8,6 +8,7 @@ export const product = {
             id: null,
             name: '',
             description: '',
+            mobileDescription: '',
             priceByDay: 0
         },
         productImgFile: null,

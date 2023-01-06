@@ -30,8 +30,8 @@
                 </div>
             </div>
 
-            <p class="text-start d-xl-none" v-html="$sanitize(product.description)"
-               style="-webkit-line-clamp: 3;display: -webkit-box;  -webkit-box-orient: vertical;overflow: hidden; font-size: 12px;">
+            <p class="text-start d-xl-none" v-html="$sanitize(product.mobile_description)"
+               style="-webkit-line-clamp: 3;display: -webkit-box;  -webkit-box-orient: vertical;overflow: hidden;">
             </p>
 
             <p class="text-start d-none d-xl-block" v-html="$sanitize(product.description)"

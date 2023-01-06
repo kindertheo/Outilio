@@ -21,8 +21,8 @@
             {{ new Date(order.date).toLocaleDateString() }}
         </td>
         <td class="p-3">
-            <div class="d-flex flex-row justify-content-evenly" v-if="!order.is_processed && !order.is_ended">
-                <button class="btn btn-sm btn-outline-danger" type="button" @click="declineOrder">
+            <div class="d-flex align-items-center" v-if="!order.is_processed && !order.is_ended">
+                <button class="btn btn-sm btn-outline-danger me-1" type="button" @click="declineOrder">
                     Refuser
                 </button>
                 <button class="btn btn-sm btn-success" type="button" @click="acceptOrder">
@@ -40,9 +40,9 @@
                 <div class="badge bg-warning text-dark" v-else>
                     Non traitée
                 </div>
-                <button class="btn btn-sm btn-outline-secondary" v-if="!order.is_ended" type="button" @click="cancelOrder">
+                <div class="text-muted text-decoration-underline ms-1" v-if="!order.is_ended" type="button" @click="cancelOrder">
                     Annuler
-                </button>
+                </div>
             </div>
         </td>
     </tr>
@@ -127,7 +127,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

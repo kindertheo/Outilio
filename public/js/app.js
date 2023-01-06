@@ -23227,7 +23227,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('OrderStore', ['setOrders']))
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('OrderStore', ['setOrders'])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('OrderStore', ['getOrders']))
 });
 
 /***/ }),
@@ -23535,6 +23536,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       id: this.product.id,
       name: this.product.name,
       description: this.product.description,
+      mobileDescription: this.product.mobile_description,
       priceByDay: this.product.price_by_day / 100
     });
   },
@@ -23587,7 +23589,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee);
     }))();
   },
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('ProductStore', ['setProducts']))
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('ProductStore', ['setProducts'])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('ProductStore', ['getProducts']))
 });
 
 /***/ }),
@@ -23944,6 +23947,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -23959,7 +23965,33 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       }
     }
   }),
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('UserStore', ['login']))
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('UserStore', ['login'])), {}, {
+    loginUser: function loginUser() {
+      var _this = this;
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var token;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.$recaptchaLoaded();
+            case 2:
+              _context.next = 4;
+              return _this.$recaptcha('login');
+            case 4:
+              token = _context.sent;
+              _context.next = 7;
+              return _this.login({
+                token: token
+              });
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }))();
+    }
+  })
 });
 
 /***/ }),
@@ -24047,9 +24079,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "min-vh-100 p-3"
+};
+var _hoisted_2 = {
+  "class": "d-flex justify-content-between align-items-center bg-dark text-white rounded-top p-3"
+};
+var _hoisted_3 = {
+  "class": "mb-0"
+};
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "fw-bold"
+}, "Réservations", -1 /* HOISTED */);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_orders_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("orders-table");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_orders_table);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.getOrders.length) + ") ", 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_orders_table)]);
 }
 
 /***/ }),
@@ -24341,7 +24386,7 @@ var _hoisted_8 = {
 };
 var _hoisted_9 = {
   key: 0,
-  "class": "d-flex flex-row justify-content-evenly"
+  "class": "d-flex align-items-center"
 };
 var _hoisted_10 = {
   key: 1,
@@ -24363,7 +24408,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.order.customer_full_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.order.customer_email), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.order.customer_phone), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.order.products, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("p", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1 /* TEXT */);
   }), 256 /* UNKEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getOrderPrice($props.order.price)), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(new Date($props.order.date).toLocaleDateString()), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_8, [!$props.order.is_processed && !$props.order.is_ended ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-sm btn-outline-danger",
+    "class": "btn btn-sm btn-outline-danger me-1",
     type: "button",
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.declineOrder && $options.declineOrder.apply($options, arguments);
@@ -24374,9 +24419,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.acceptOrder && $options.acceptOrder.apply($options, arguments);
     })
-  }, " Accepter ")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [$props.order.is_accepted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_11, " Acceptée ")) : $props.order.is_processed ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_12, " Refusée ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, " Non traitée ")), !$props.order.is_ended ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  }, " Accepter ")])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_10, [$props.order.is_accepted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_11, " Acceptée ")) : $props.order.is_processed ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_12, " Refusée ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, " Non traitée ")), !$props.order.is_ended ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 3,
-    "class": "btn btn-sm btn-outline-secondary",
+    "class": "text-muted text-decoration-underline ms-1",
     type: "button",
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.cancelOrder && $options.cancelOrder.apply($options, arguments);
@@ -24400,21 +24445,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container",
+  "class": "table-responsive shadow-sm rounded-bottom",
   style: {
-    "height": "82vh"
+    "height": "90vh"
   }
 };
 var _hoisted_2 = {
-  "class": "table-responsive mt-4 shadow-sm rounded",
-  style: {
-    "height": "78vh"
-  }
+  "class": "table table-sm table-hover"
 };
-var _hoisted_3 = {
-  "class": "table table-sm m-10px table-hover text-center"
-};
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", {
   style: {
     "position": "sticky",
     "top": "0px",
@@ -24434,26 +24473,26 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "class": "p-3"
 }, "Date"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "p-3"
-}, "Action")])], -1 /* HOISTED */);
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+})])], -1 /* HOISTED */);
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
   colspan: "7",
-  "class": "fw-bold text-start ps-4 bg-light",
+  "class": "fw-bold text-start ps-3 bg-light",
   style: {
     "color": "#D80000",
     "height": "18px"
   }
 }, " A traiter ")], -1 /* HOISTED */);
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
   colspan: "7",
-  "class": "fw-bold text-start ps-4 bg-light",
+  "class": "fw-bold text-start ps-3 bg-light",
   style: {
     "color": "#FFA012",
     "height": "18px !important"
   }
 }, " Non terminées ")], -1 /* HOISTED */);
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", {
   colspan: "7",
-  "class": "fw-bold text-start ps-4 bg-light",
+  "class": "fw-bold text-start ps-3 bg-light",
   style: {
     "color": "#009621",
     "height": "18px"
@@ -24462,19 +24501,19 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_order_row = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("order-row");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [_hoisted_5, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.notProcessedOrder, function (order) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [_hoisted_4, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.notProcessedOrder, function (order) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_order_row, {
       order: order
     }, null, 8 /* PROPS */, ["order"]);
-  }), 256 /* UNKEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [_hoisted_6, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.notEndedOrders, function (order) {
+  }), 256 /* UNKEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [_hoisted_5, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.notEndedOrders, function (order) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_order_row, {
       order: order
     }, null, 8 /* PROPS */, ["order"]);
-  }), 256 /* UNKEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [_hoisted_7, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.endedOrders, function (order) {
+  }), 256 /* UNKEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [_hoisted_6, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.endedOrders, function (order) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_order_row, {
       order: order
     }, null, 8 /* PROPS */, ["order"]);
-  }), 256 /* UNKEYED_FRAGMENT */))])])])]);
+  }), 256 /* UNKEYED_FRAGMENT */))])])]);
 }
 
 /***/ }),
@@ -24496,7 +24535,7 @@ var _hoisted_1 = {
   "class": "min-vh-100 d-flex justify-content-center align-items-center"
 };
 var _hoisted_2 = {
-  "class": "bg-light rounded p-3 shadow-sm",
+  "class": "bg-light rounded p-3 shadow-sm mt-3",
   style: {
     "min-width": "50vw"
   }
@@ -24547,7 +24586,7 @@ var _hoisted_1 = {
   "class": "min-vh-100 d-flex justify-content-center align-items-center"
 };
 var _hoisted_2 = {
-  "class": "bg-light rounded p-3 shadow-sm",
+  "class": "bg-light rounded p-3 shadow-sm mt-3",
   style: {
     "min-width": "50vw"
   }
@@ -24594,13 +24633,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "/products/create"
+var _hoisted_1 = {
+  "class": "min-vh-100 p-3"
+};
+var _hoisted_2 = {
+  "class": "d-flex justify-content-between align-items-center bg-dark text-white rounded-top p-3"
+};
+var _hoisted_3 = {
+  "class": "mb-0"
+};
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "fw-bold"
+}, "Produits", -1 /* HOISTED */);
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  href: "/products/create",
+  "class": "btn btn-light btn-sm shadow-none"
 }, " Ajouter un produit ", -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_products_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("products-table");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_products_table)], 64 /* STABLE_FRAGMENT */);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" (" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.getProducts.length) + ") ", 1 /* TEXT */)]), _hoisted_5]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_products_table)]);
 }
 
 /***/ }),
@@ -24725,13 +24777,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "for": "btn-check-outlined-".concat($props.product.id)
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.name), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getProductPrice($props.product.price_by_day)), 1 /* TEXT */), _hoisted_12])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     "class": "text-start d-xl-none",
-    innerHTML: _ctx.$sanitize($props.product.description),
+    innerHTML: _ctx.$sanitize($props.product.mobile_description),
     style: {
       "-webkit-line-clamp": "3",
       "display": "-webkit-box",
       "-webkit-box-orient": "vertical",
-      "overflow": "hidden",
-      "font-size": "12px"
+      "overflow": "hidden"
     }
   }, null, 8 /* PROPS */, _hoisted_13), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     "class": "text-start d-none d-xl-block",
@@ -24781,7 +24832,13 @@ var _hoisted_3 = {
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "floatingTextarea2"
 }, "Description", -1 /* HOISTED */);
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_5 = {
+  "class": "form-floating mb-3"
+};
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "floatingTextarea3"
+}, "Description pour mobile", -1 /* HOISTED */);
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "browse"
 }, "cliquez", -1 /* HOISTED */);
 
@@ -24801,20 +24858,31 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Description",
     id: "floatingTextarea2",
     style: {
-      "height": "100px",
+      "height": "150px",
       "resize": "none"
     },
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $options.product.description = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.product.description]]), _hoisted_4]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_currency_input, {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.product.description]]), _hoisted_4]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", {
+    "class": "form-control shadow-none",
+    placeholder: "Description pour mobile",
+    id: "floatingTextarea3",
+    style: {
+      "height": "100px",
+      "resize": "none"
+    },
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $options.product.mobileDescription = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.product.mobileDescription]]), _hoisted_6]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_currency_input, {
     "class": "mb-3",
     options: {
       currency: 'EUR',
       precision: 2
     },
     modelValue: $options.product.priceByDay,
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $options.product.priceByDay = $event;
     }),
     placeholder: "Prix / Jour"
@@ -24827,7 +24895,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     multipleUpload: false
   }, {
     message: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Glissez ou "), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" pour ajouter une image du produit ")];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Glissez ou "), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" pour ajouter une image du produit ")];
     }),
     _: 1 /* STABLE */
   }, 8 /* PROPS */, ["onAddedFile", "onRemovedFile"])]);
@@ -24848,25 +24916,70 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = ["src"];
-var _hoisted_2 = ["href"];
+var _hoisted_1 = {
+  "class": "p-3 text-center"
+};
+var _hoisted_2 = ["src"];
+var _hoisted_3 = {
+  "class": "p-3"
+};
+var _hoisted_4 = {
+  "class": "p-3"
+};
+var _hoisted_5 = ["innerHTML"];
+var _hoisted_6 = {
+  "class": "p-3"
+};
+var _hoisted_7 = ["innerHTML"];
+var _hoisted_8 = {
+  "class": "p-3"
+};
+var _hoisted_9 = {
+  "class": "p-3"
+};
+var _hoisted_10 = ["href"];
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fa fa-edit-pen"
+}, null, -1 /* HOISTED */);
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fa fa-trash"
+}, null, -1 /* HOISTED */);
+var _hoisted_13 = [_hoisted_12];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [$props.product.img_path ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_1, [$props.product.img_path ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
     key: 0,
     src: $props.product.img_path,
     style: {
-      "max-height": "100px",
-      "max-width": "100px",
+      "max-height": "75px",
+      "max-width": "75px",
       "height": "auto",
       "width": "auto"
     }
-  }, null, 8 /* PROPS */, _hoisted_1)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.description), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getProductPrice($props.product.price_by_day)), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    href: _ctx.$sanitize("/products/".concat($props.product.id))
-  }, " Modifier ", 8 /* PROPS */, _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, null, 8 /* PROPS */, _hoisted_2)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.product.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+    innerHTML: _ctx.$sanitize($props.product.description),
+    style: {
+      "-webkit-line-clamp": "3",
+      "display": "-webkit-box",
+      "-webkit-box-orient": "vertical",
+      "overflow": "hidden"
+    }
+  }, null, 8 /* PROPS */, _hoisted_5)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+    innerHTML: _ctx.$sanitize($props.product.mobile_description),
+    style: {
+      "-webkit-line-clamp": "3",
+      "display": "-webkit-box",
+      "-webkit-box-orient": "vertical",
+      "overflow": "hidden"
+    }
+  }, null, 8 /* PROPS */, _hoisted_7)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getProductPrice($props.product.price_by_day)), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: _ctx.$sanitize("/products/".concat($props.product.id)),
+    "class": "btn btn-sm btn-primary shadow-none me-1"
+  }, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Modifier ")], 8 /* PROPS */, _hoisted_10), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[0] || (_cache[0] = function () {
       return $options.removeProduct && $options.removeProduct.apply($options, arguments);
-    })
-  }, " Supprimer ")])]);
+    }),
+    "class": "btn btn-sm btn-danger shadow-none"
+  }, _hoisted_13)])]);
 }
 
 /***/ }),
@@ -24979,15 +25092,60 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Nom"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Description"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Prix par jour"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th")], -1 /* HOISTED */);
+var _hoisted_1 = {
+  "class": "table-responsive shadow-sm rounded-bottom",
+  style: {
+    "height": "90vh"
+  }
+};
+var _hoisted_2 = {
+  "class": "table table-sm table-hover"
+};
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", {
+  style: {
+    "position": "sticky",
+    "top": "0px",
+    "background-color": "#FFFFFF"
+  }
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "p-3",
+  style: {
+    "width": "15%"
+  }
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "p-3",
+  style: {
+    "width": "15%"
+  }
+}, "Nom"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "p-3",
+  style: {
+    "width": "25%"
+  }
+}, "Description"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "p-3",
+  style: {
+    "width": "15%"
+  }
+}, "Description Mobile"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "p-3",
+  style: {
+    "width": "15%"
+  }
+}, "Prix / Jour"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+  "class": "p-3",
+  style: {
+    "width": "15%"
+  }
+})])], -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_product_row = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("product-row");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("table", null, [_hoisted_1, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.getProducts, function (product) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.getProducts, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_product_row, {
       product: product
     }, null, 8 /* PROPS */, ["product"]);
-  }), 256 /* UNKEYED_FRAGMENT */))]);
+  }), 256 /* UNKEYED_FRAGMENT */))])])]);
 }
 
 /***/ }),
@@ -25039,7 +25197,6 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_8 = {
   "class": "mt-3 text-end"
 };
-var _hoisted_9 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -25061,11 +25218,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.user.password]]), _hoisted_7]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     onClick: _cache[2] || (_cache[2] = function ($event) {
-      return _this.login();
+      return _this.loginUser();
     }),
-    disabled: this.isFormInvalid,
     "class": "btn btn-dark shadow-none"
-  }, " Se connecter ", 8 /* PROPS */, _hoisted_9)])])]);
+  }, " Se connecter ")])])]);
 }
 
 /***/ }),
@@ -25331,6 +25487,7 @@ var product = {
         id: null,
         name: '',
         description: '',
+        mobileDescription: '',
         priceByDay: 0
       },
       productImgFile: null,
@@ -25496,9 +25653,9 @@ var user = {
   },
   mutations: {},
   actions: {
-    login: function login(_ref) {
+    login: function login(_ref, payload) {
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var getters, user;
+        var getters, user, _yield$axios$post, data;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -25506,11 +25663,14 @@ var user = {
               user = getters.getUser;
               _context.next = 4;
               return axios__WEBPACK_IMPORTED_MODULE_0___default().post('/login', {
-                user: user
+                user: user,
+                token: payload.token
               });
             case 4:
-              window.location.href = '/orders';
-            case 5:
+              _yield$axios$post = _context.sent;
+              data = _yield$axios$post.data;
+              if (data[0] === 'success') window.location.href = '/orders';
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -25574,15 +25734,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var dropzone_vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(dropzone_vue__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vue_3_sanitize__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-3-sanitize */ "./node_modules/vue-3-sanitize/dist/vue-3-sanitize.js");
 /* harmony import */ var vue_3_sanitize__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_3_sanitize__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var vue_recaptcha_v3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-recaptcha-v3 */ "./node_modules/vue-recaptcha-v3/dist/ReCaptchaVuePlugin.js");
+/* harmony import */ var vue_recaptcha_v3__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_recaptcha_v3__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
-var dependencies = [_store__WEBPACK_IMPORTED_MODULE_0__["default"], v_calendar__WEBPACK_IMPORTED_MODULE_1__["default"], (dropzone_vue__WEBPACK_IMPORTED_MODULE_2___default()), (vue_3_sanitize__WEBPACK_IMPORTED_MODULE_3___default())];
+
+var dependencies = [[_store__WEBPACK_IMPORTED_MODULE_0__["default"], {}], [v_calendar__WEBPACK_IMPORTED_MODULE_1__["default"], {}], [(dropzone_vue__WEBPACK_IMPORTED_MODULE_2___default()), {}], [(vue_3_sanitize__WEBPACK_IMPORTED_MODULE_3___default()), {}], [vue_recaptcha_v3__WEBPACK_IMPORTED_MODULE_4__.VueReCaptcha, {
+  siteKey: '6Lfjf9YjAAAAACh-HuvW_uUIzJY0qivRBss4n8Gp',
+  loaderOptions: {
+    autoHideBadge: true
+  }
+}]];
 var addDependencies = function addDependencies(app) {
   for (var _i = 0, _dependencies = dependencies; _i < _dependencies.length; _i++) {
     var dependencie = _dependencies[_i];
-    app.use(dependencie);
+    app.use(dependencie[0], dependencie[1]);
   }
 };
 
@@ -55625,6 +55793,300 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/recaptcha-v3/dist/ReCaptcha.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/recaptcha-v3/dist/ReCaptcha.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ReCaptchaInstance = exports.getInstance = exports.load = void 0;
+var ReCaptchaLoader_1 = __webpack_require__(/*! ./ReCaptchaLoader */ "./node_modules/recaptcha-v3/dist/ReCaptchaLoader.js");
+Object.defineProperty(exports, "load", ({ enumerable: true, get: function () { return ReCaptchaLoader_1.load; } }));
+Object.defineProperty(exports, "getInstance", ({ enumerable: true, get: function () { return ReCaptchaLoader_1.getInstance; } }));
+var ReCaptchaInstance_1 = __webpack_require__(/*! ./ReCaptchaInstance */ "./node_modules/recaptcha-v3/dist/ReCaptchaInstance.js");
+Object.defineProperty(exports, "ReCaptchaInstance", ({ enumerable: true, get: function () { return ReCaptchaInstance_1.ReCaptchaInstance; } }));
+
+
+/***/ }),
+
+/***/ "./node_modules/recaptcha-v3/dist/ReCaptchaInstance.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/recaptcha-v3/dist/ReCaptchaInstance.js ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ReCaptchaInstance = void 0;
+var ReCaptchaInstance = (function () {
+    function ReCaptchaInstance(siteKey, recaptchaID, recaptcha) {
+        this.siteKey = siteKey;
+        this.recaptchaID = recaptchaID;
+        this.recaptcha = recaptcha;
+        this.styleContainer = null;
+    }
+    ReCaptchaInstance.prototype.execute = function (action) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2, this.recaptcha.enterprise ? this.recaptcha.enterprise.execute(this.recaptchaID, { action: action }) : this.recaptcha.execute(this.recaptchaID, { action: action })];
+            });
+        });
+    };
+    ReCaptchaInstance.prototype.getSiteKey = function () {
+        return this.siteKey;
+    };
+    ReCaptchaInstance.prototype.hideBadge = function () {
+        if (this.styleContainer !== null) {
+            return;
+        }
+        this.styleContainer = document.createElement('style');
+        this.styleContainer.innerHTML = '.grecaptcha-badge{visibility:hidden !important;}';
+        document.head.appendChild(this.styleContainer);
+    };
+    ReCaptchaInstance.prototype.showBadge = function () {
+        if (this.styleContainer === null) {
+            return;
+        }
+        document.head.removeChild(this.styleContainer);
+        this.styleContainer = null;
+    };
+    return ReCaptchaInstance;
+}());
+exports.ReCaptchaInstance = ReCaptchaInstance;
+
+
+/***/ }),
+
+/***/ "./node_modules/recaptcha-v3/dist/ReCaptchaLoader.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/recaptcha-v3/dist/ReCaptchaLoader.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getInstance = exports.load = void 0;
+var ReCaptchaInstance_1 = __webpack_require__(/*! ./ReCaptchaInstance */ "./node_modules/recaptcha-v3/dist/ReCaptchaInstance.js");
+var ELoadingState;
+(function (ELoadingState) {
+    ELoadingState[ELoadingState["NOT_LOADED"] = 0] = "NOT_LOADED";
+    ELoadingState[ELoadingState["LOADING"] = 1] = "LOADING";
+    ELoadingState[ELoadingState["LOADED"] = 2] = "LOADED";
+})(ELoadingState || (ELoadingState = {}));
+var ReCaptchaLoader = (function () {
+    function ReCaptchaLoader() {
+    }
+    ReCaptchaLoader.load = function (siteKey, options) {
+        if (options === void 0) { options = {}; }
+        if (typeof document === 'undefined') {
+            return Promise.reject(new Error('This is a library for the browser!'));
+        }
+        if (ReCaptchaLoader.getLoadingState() === ELoadingState.LOADED) {
+            if (ReCaptchaLoader.instance.getSiteKey() === siteKey) {
+                return Promise.resolve(ReCaptchaLoader.instance);
+            }
+            else {
+                return Promise.reject(new Error('reCAPTCHA already loaded with different site key!'));
+            }
+        }
+        if (ReCaptchaLoader.getLoadingState() === ELoadingState.LOADING) {
+            if (siteKey !== ReCaptchaLoader.instanceSiteKey) {
+                return Promise.reject(new Error('reCAPTCHA already loaded with different site key!'));
+            }
+            return new Promise(function (resolve, reject) {
+                ReCaptchaLoader.successfulLoadingConsumers.push(function (instance) { return resolve(instance); });
+                ReCaptchaLoader.errorLoadingRunnable.push(function (reason) { return reject(reason); });
+            });
+        }
+        ReCaptchaLoader.instanceSiteKey = siteKey;
+        ReCaptchaLoader.setLoadingState(ELoadingState.LOADING);
+        var loader = new ReCaptchaLoader();
+        return new Promise(function (resolve, reject) {
+            loader.loadScript(siteKey, options.useRecaptchaNet || false, options.useEnterprise || false, options.renderParameters ? options.renderParameters : {}, options.customUrl).then(function () {
+                ReCaptchaLoader.setLoadingState(ELoadingState.LOADED);
+                var widgetID = loader.doExplicitRender(grecaptcha, siteKey, options.explicitRenderParameters ? options.explicitRenderParameters : {}, options.useEnterprise || false);
+                var instance = new ReCaptchaInstance_1.ReCaptchaInstance(siteKey, widgetID, grecaptcha);
+                ReCaptchaLoader.successfulLoadingConsumers.forEach(function (v) { return v(instance); });
+                ReCaptchaLoader.successfulLoadingConsumers = [];
+                if (options.autoHideBadge) {
+                    instance.hideBadge();
+                }
+                ReCaptchaLoader.instance = instance;
+                resolve(instance);
+            }).catch(function (error) {
+                ReCaptchaLoader.errorLoadingRunnable.forEach(function (v) { return v(error); });
+                ReCaptchaLoader.errorLoadingRunnable = [];
+                reject(error);
+            });
+        });
+    };
+    ReCaptchaLoader.getInstance = function () {
+        return ReCaptchaLoader.instance;
+    };
+    ReCaptchaLoader.setLoadingState = function (state) {
+        ReCaptchaLoader.loadingState = state;
+    };
+    ReCaptchaLoader.getLoadingState = function () {
+        if (ReCaptchaLoader.loadingState === null) {
+            return ELoadingState.NOT_LOADED;
+        }
+        else {
+            return ReCaptchaLoader.loadingState;
+        }
+    };
+    ReCaptchaLoader.prototype.loadScript = function (siteKey, useRecaptchaNet, useEnterprise, renderParameters, customUrl) {
+        var _this = this;
+        if (useRecaptchaNet === void 0) { useRecaptchaNet = false; }
+        if (useEnterprise === void 0) { useEnterprise = false; }
+        if (renderParameters === void 0) { renderParameters = {}; }
+        if (customUrl === void 0) { customUrl = ''; }
+        var scriptElement = document.createElement('script');
+        scriptElement.setAttribute('recaptcha-v3-script', '');
+        var scriptBase = 'https://www.google.com/recaptcha/api.js';
+        if (useRecaptchaNet) {
+            if (useEnterprise) {
+                scriptBase = 'https://recaptcha.net/recaptcha/enterprise.js';
+            }
+            else {
+                scriptBase = 'https://recaptcha.net/recaptcha/api.js';
+            }
+        }
+        if (useEnterprise) {
+            scriptBase = 'https://www.google.com/recaptcha/enterprise.js';
+        }
+        if (customUrl) {
+            scriptBase = customUrl;
+        }
+        if (renderParameters.render) {
+            renderParameters.render = undefined;
+        }
+        var parametersQuery = this.buildQueryString(renderParameters);
+        scriptElement.src = scriptBase + '?render=explicit' + parametersQuery;
+        return new Promise(function (resolve, reject) {
+            scriptElement.addEventListener('load', _this.waitForScriptToLoad(function () {
+                resolve(scriptElement);
+            }, useEnterprise), false);
+            scriptElement.onerror = function (error) {
+                ReCaptchaLoader.setLoadingState(ELoadingState.NOT_LOADED);
+                reject(error);
+            };
+            document.head.appendChild(scriptElement);
+        });
+    };
+    ReCaptchaLoader.prototype.buildQueryString = function (parameters) {
+        var parameterKeys = Object.keys(parameters);
+        if (parameterKeys.length < 1) {
+            return '';
+        }
+        return '&' + Object.keys(parameters)
+            .filter(function (parameterKey) {
+            return !!parameters[parameterKey];
+        })
+            .map(function (parameterKey) {
+            return parameterKey + '=' + parameters[parameterKey];
+        }).join('&');
+    };
+    ReCaptchaLoader.prototype.waitForScriptToLoad = function (callback, useEnterprise) {
+        var _this = this;
+        return function () {
+            if (window.grecaptcha === undefined) {
+                setTimeout(function () {
+                    _this.waitForScriptToLoad(callback, useEnterprise);
+                }, ReCaptchaLoader.SCRIPT_LOAD_DELAY);
+            }
+            else {
+                if (useEnterprise) {
+                    window.grecaptcha.enterprise.ready(function () {
+                        callback();
+                    });
+                }
+                else {
+                    window.grecaptcha.ready(function () {
+                        callback();
+                    });
+                }
+            }
+        };
+    };
+    ReCaptchaLoader.prototype.doExplicitRender = function (grecaptcha, siteKey, parameters, isEnterprise) {
+        var augmentedParameters = {
+            sitekey: siteKey,
+            badge: parameters.badge,
+            size: parameters.size,
+            tabindex: parameters.tabindex
+        };
+        if (parameters.container) {
+            if (isEnterprise) {
+                return grecaptcha.enterprise.render(parameters.container, augmentedParameters);
+            }
+            else {
+                return grecaptcha.render(parameters.container, augmentedParameters);
+            }
+        }
+        else {
+            if (isEnterprise) {
+                return grecaptcha.enterprise.render(augmentedParameters);
+            }
+            else {
+                return grecaptcha.render(augmentedParameters);
+            }
+        }
+    };
+    ReCaptchaLoader.loadingState = null;
+    ReCaptchaLoader.instance = null;
+    ReCaptchaLoader.instanceSiteKey = null;
+    ReCaptchaLoader.successfulLoadingConsumers = [];
+    ReCaptchaLoader.errorLoadingRunnable = [];
+    ReCaptchaLoader.SCRIPT_LOAD_DELAY = 25;
+    return ReCaptchaLoader;
+}());
+exports.load = ReCaptchaLoader.load;
+exports.getInstance = ReCaptchaLoader.getInstance;
+
+
+/***/ }),
+
 /***/ "./node_modules/sanitize-html/index.js":
 /*!*********************************************!*\
   !*** ./node_modules/sanitize-html/index.js ***!
@@ -76712,6 +77174,123 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LoginView_vue_vue_type_template_id_dfc32b9e__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_LoginView_vue_vue_type_template_id_dfc32b9e__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./LoginView.vue?vue&type=template&id=dfc32b9e */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/modules/users/LoginView.vue?vue&type=template&id=dfc32b9e");
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-recaptcha-v3/dist/ReCaptchaVuePlugin.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/vue-recaptcha-v3/dist/ReCaptchaVuePlugin.js ***!
+  \******************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.useReCaptcha = exports.VueReCaptcha = void 0;
+var recaptcha_v3_1 = __webpack_require__(/*! recaptcha-v3 */ "./node_modules/recaptcha-v3/dist/ReCaptcha.js");
+var vue_1 = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+var VueReCaptchaInjectKey = Symbol('VueReCaptchaInjectKey');
+var globalConfig = {
+    loadedWaiters: [],
+    error: null
+};
+exports.VueReCaptcha = {
+    install: function (app, options) {
+        var isLoaded = vue_1.ref(false);
+        var instance = vue_1.ref(undefined);
+        app.config.globalProperties.$recaptchaLoaded = recaptchaLoaded(isLoaded);
+        initializeReCaptcha(options).then(function (wrapper) {
+            isLoaded.value = true;
+            instance.value = wrapper;
+            app.config.globalProperties.$recaptcha = recaptcha(instance);
+            app.config.globalProperties.$recaptchaInstance = instance;
+            globalConfig.loadedWaiters.forEach(function (v) { return v.resolve(true); });
+        }).catch(function (error) {
+            globalConfig.error = error;
+            globalConfig.loadedWaiters.forEach(function (v) { return v.reject(error); });
+        });
+        app.provide(VueReCaptchaInjectKey, {
+            instance: instance,
+            isLoaded: isLoaded,
+            executeRecaptcha: recaptcha(instance),
+            recaptchaLoaded: recaptchaLoaded(isLoaded)
+        });
+    }
+};
+function useReCaptcha() {
+    return vue_1.inject(VueReCaptchaInjectKey);
+}
+exports.useReCaptcha = useReCaptcha;
+function initializeReCaptcha(options) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4, recaptcha_v3_1.load(options.siteKey, options.loaderOptions)];
+                case 1: return [2, _a.sent()];
+            }
+        });
+    });
+}
+function recaptchaLoaded(isLoaded) {
+    return function () { return new Promise(function (resolve, reject) {
+        if (globalConfig.error !== null) {
+            return reject(globalConfig.error);
+        }
+        if (isLoaded.value) {
+            return resolve(true);
+        }
+        globalConfig.loadedWaiters.push({ resolve: resolve, reject: reject });
+    }); };
+}
+function recaptcha(instance) {
+    var _this = this;
+    return function (action) { return __awaiter(_this, void 0, void 0, function () {
+        var _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0: return [4, ((_a = instance.value) === null || _a === void 0 ? void 0 : _a.execute(action))];
+                case 1: return [2, _b.sent()];
+            }
+        });
+    }); };
+}
 
 
 /***/ }),

@@ -59,6 +59,7 @@ class ProductController extends Controller
             'name' => $product['name'],
             'sluggy_name' => $sluggyName,
             'description' => $product['description'],
+            'mobile_description' => $product['mobileDescription'],
             'price_by_day' => $product['priceByDay'] * 100,
             'img_path' => $imgPath,
             'created_at' => Carbon::now()
@@ -94,25 +95,13 @@ class ProductController extends Controller
         $productsAvailables = Product::whereRelation('orders', 'date', '!=', $date)
             ->orWhereRelation('orders', 'is_processed', false)
             ->orWhereDoesntHave('orders')
-            ->select(
-                'id',
-                'name',
-                'description',
-                'price_by_day',
-                'img_path'
-            )
+            ->select()
             ->addSelect(DB::raw('1 as is_available'))
             ->get();
 
         $productsNotAvailables = Product::whereRelation('orders', 'date', '=', $date)
             ->whereRelation('orders', 'is_accepted', true)
-            ->select(
-                'id',
-                'name',
-                'description',
-                'price_by_day',
-                'img_path'
-            )
+            ->select()
             ->addSelect(DB::raw('0 as is_available'))
             ->get();
 
@@ -164,6 +153,7 @@ class ProductController extends Controller
             'name' => $updatedProduct['name'],
             'sluggy_name' => $sluggyName,
             'description' => $updatedProduct['description'],
+            'mobile_description' => $updatedProduct['mobileDescription'],
             'price_by_day' => $updatedProduct['priceByDay'] * 100,
             'img_path' => $imgPath,
             'updated_at' => Carbon::now()
