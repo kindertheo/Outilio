@@ -56,3 +56,15 @@ npm run watch
 
 Access the project
 [http://localhost:8000](http://localhost:8000)
+
+
+Run tests
+```sh
+Unit tests
+php artisan test
+
+Integration tests
+composer require laravel/dusk:*
+php artisan dusk:install
+php artisan dusk
+```
