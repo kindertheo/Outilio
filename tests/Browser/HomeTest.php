@@ -8,6 +8,12 @@ use Tests\DuskTestCase;
 
 class HomeTest extends DuskTestCase
 {
+    private
+    function getPrice($price)
+    {
+        $formatter = new \NumberFormatter('fr_FR', \NumberFormatter::CURRENCY);
+        return str_replace("\xc2\xa0", ' ', $formatter->formatCurrency($price, 'EUR'));
+    }
     /**
      * A Dusk test example.
      *
@@ -17,7 +23,7 @@ class HomeTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->assertSee('Etape 1');
+                ->assertSee('Étape 1');
         });
     }
 
@@ -32,9 +38,10 @@ class HomeTest extends DuskTestCase
                 ->keys('#lastname', 'Tedqzst')
                 ->keys('#phone', '0634567890')
                 ->keys('#email', 'mail@mail.com')
-                ->press("#btn-check-outlined-1")
-                ->press("#btn-check-outlined-2")
-                ->click("#submitOrder")
+                ->press("#checkbox-2")
+                ->press("#product-1")
+                ->press("#product-2")
+                ->press("#submitOrder")
                 ->pause(1000)
                 ->assertSee('Votre réservation est prise en compte');
         });
@@ -54,8 +61,11 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000);
-            $productPrice1 = $browser->attribute("#btn-check-outlined-1", "data-price");
-            $browser->assertSeeIn('div#price', "{$productPrice1} €");
+            $productPrice1 = $browser->attribute("#product-1", "data-price");
+            $productPrice1 = $this->getPrice($productPrice1);
+            $browser->press("#product-1");
+            $price = $browser->text('div#price');
+            $browser->assertSeeIn('div#price', "{$productPrice1}");
         });
     }
 
@@ -64,10 +74,12 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000);
-            $productPrice1 = $browser->element("#btn-check-outlined-1")->getAttribute('data-price');
-            $productPrice2 = $browser->element("#btn-check-outlined-2")->getAttribute('data-price');
-            $finalPrice = ($productPrice1 + $productPrice2) * 0.1;
-            $browser->assertSeeIn('div#price', "{$finalPrice} €");
+            $productPrice1 = $browser->element("#product-1")->getAttribute('data-price');
+            $productPrice2 = $browser->element("#product-2")->getAttribute('data-price');
+            $browser->press("#product-1")
+                ->press("#product-2");
+            $finalPrice = $this->getPrice(($productPrice1 + $productPrice2) * 0.9);
+            $browser->assertSeeIn('div#price', "{$finalPrice}");
         });
     }
 
@@ -76,11 +88,14 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000);
-            $productPrice1 = $browser->element("#btn-check-outlined-1")->getAttribute('data-price');
-            $productPrice2 = $browser->element("#btn-check-outlined-2")->getAttribute('data-price');
-            $productPrice2 = $browser->element("#btn-check-outlined-3")->getAttribute('data-price');
-            $finalPrice = ($productPrice1 + $productPrice2) * 0.15;
-            $browser->assertSeeIn('div#price', "{$finalPrice} €");
+            $productPrice1 = $browser->element("#product-1")->getAttribute('data-price');
+            $productPrice2 = $browser->element("#product-2")->getAttribute('data-price');
+            $productPrice3 = $browser->element("#product-3")->getAttribute('data-price');
+            $browser->press("#product-1")
+                ->press("#product-2")
+                ->press("#product-3");
+            $finalPrice = $this->getPrice(($productPrice1 + $productPrice2 + $productPrice3) * 0.85);
+            $browser->assertSeeIn('div#price', "{$finalPrice}");
         });
     }
 
@@ -98,7 +113,7 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000)
-                ->press("#btn-check-outlined-1")
+                ->press("#product-1")
                 ->assertDisabled('#submitOrder');
         });
     }
@@ -108,7 +123,7 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000)
-                ->press("#btn-check-outlined-1")
+                ->press("#product-1")
                 ->keys('#firstname', 'Théo')
                 ->assertDisabled('#submitOrder');
         });
@@ -119,7 +134,7 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000)
-                ->press("#btn-check-outlined-1")
+                ->press("#product-1")
                 ->keys('#firstname', 'Théo')
                 ->keys('#lastname', 'Test')
                 ->assertDisabled('#submitOrder');
@@ -131,7 +146,7 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000)
-                ->press("#btn-check-outlined-1")
+                ->press("#product-1")
                 ->keys('#firstname', 'Théo')
                 ->keys('#lastname', 'Test')
                 ->keys('#phone', '060606060606')
@@ -144,7 +159,7 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000)
-                ->press("#btn-check-outlined-1")
+                ->press("#product-1")
                 ->keys('#firstname', 'Théo')
                 ->keys('#lastname', 'Test')
                 ->keys('#phone', '060606060606')
@@ -158,7 +173,7 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000)
-                ->press("#btn-check-outlined-1")
+                ->press("#product-1")
                 ->keys('#firstname', 'Théo')
                 ->keys('#lastname', 'Test')
                 ->keys('#phone', '0606060609090909090909090909090')
@@ -172,7 +187,7 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000)
-                ->press("#btn-check-outlined-1")
+                ->press("#product-1")
                 ->keys('#firstname', 'Théo')
                 ->keys('#lastname', 'Test')
                 ->keys('#phone', 'ABCDEFGH87#P)')
@@ -186,7 +201,7 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000)
-                ->press("#btn-check-outlined-1")
+                ->press("#product-1")
                 ->keys('#firstname', 'T')
                 ->keys('#lastname', 'Test')
                 ->keys('#phone', '060606060606')
@@ -200,7 +215,7 @@ class HomeTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 ->pause(1000)
-                ->press("#btn-check-outlined-1")
+                ->press("#product-1")
                 ->keys('#firstname', 'Théo')
                 ->keys('#lastname', 'T')
                 ->keys('#phone', '060606060606')
