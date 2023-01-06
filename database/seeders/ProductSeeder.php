@@ -17,6 +17,6 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('products')->insert(Product::factory()->count(3)->make()->toArray());
+        Product::factory()->count(3)->create();
     }
 }

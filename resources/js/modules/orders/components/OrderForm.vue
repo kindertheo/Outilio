@@ -9,7 +9,7 @@
                     </div>
                 </div>
 
-                <v-date-picker v-model="order.date" @dayclick="updateProducts" :min-date='new Date()'>
+                <v-date-picker v-model="order.date" @dayclick="updateProducts" :min-date='new Date()' :is-required="true">
                     <template v-slot="{ inputValue, inputEvents, togglePopover }">
                         <div class="d-flex align-items-center" @click="togglePopover" v-on="inputEvents">
                             <div class="px-2 py-1" style="border: solid 1px #DCDCDC">
