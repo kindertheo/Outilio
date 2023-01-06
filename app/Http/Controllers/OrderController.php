@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Order as MailOrder;
 
 class OrderController extends Controller
 {
@@ -60,6 +62,9 @@ class OrderController extends Controller
 
         foreach ($request->order['products'] as $product)
             $order->products()->attach($product['id']);
+
+//        Mail::to('jhon.doe.mns@gmail.com')
+//            ->send(new MailOrder($order));
     }
 
     /**
